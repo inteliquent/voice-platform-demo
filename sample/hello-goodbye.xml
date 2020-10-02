@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script xmlns="urn:xmpp:layered:1">
+   <head />
+   <body>
+   	<accept alias="inbound"/>
+   	<ring/>
+   	<answer>
+   		<onConnect>
+   			<say text="Hello. Goodbye .">
+   				<onComplete>
+   					<hangup/>
+   				</onComplete>
+   			</say>
+   		</onConnect>
+	</answer>
+    </body>
+</script>
