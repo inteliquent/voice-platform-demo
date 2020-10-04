@@ -10,23 +10,32 @@ This document is intended for prospective Inteliquent Voice Platform API custome
 
 The [Inteliquent Customer Portal](https://portal.inteliquent.com) is the web based tool that our you usemanage your account with us. 
 
-#### Credientials
-Username: demo@customer.info 
-Password: [Find here]
+- demo.vp.sip.global
+- New demo number
+- Limited API key
 
-### SIP Trunks
+*Question: Does this environment need to be isolated?*
+
+#### Credientials
+
+- Username: demo@customer.info 
+- Password: [Find here]
+- API Key: [Generated]
+
+Using the Voice Platform Demo portal. A new account and credentials were provisioned for this demo customer.
+
+### Examples
 
 ### API Documentation
 
-[Inteliscript API Guide](https://inteliscript.docs.apiary.io/)
-
-### Demo Dashboard?
-
-## Test Service
+- voice-platform-demo.inteliquent.net
+- [Inteliscript API Guide](https://inteliscript.docs.apiary.io/)
 
 ### Groundwire / Cloudsoftphone
 
-## Examples
+Groundwire Free Code
+Configuration via QR
+QR Code
 
 ## External Registration
 
