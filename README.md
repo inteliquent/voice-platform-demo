@@ -30,6 +30,26 @@ Please [contact us](mailto:sales@inteliquent.com) if you don't have this and wis
 ```
 
 #### Submit your script
+- demo.vp.sip.global
+- New demo number
+- Limited API key
+
+*Question: Does this environment need to be isolated?*
+
+#### Credientials
+
+- Username: demo@customer.info 
+- Password: [Find here]
+- API Key: [Generated]
+
+Using the Voice Platform Demo portal. A new account and credentials were provisioned for this demo customer.
+
+### Examples
+
+### API Documentation
+
+- voice-platform-demo.inteliquent.net
+- [Inteliscript API Guide](https://inteliscript.docs.apiary.io/)
 
 ```bash
 curl --location --request POST 'https://vpdemo.inteliquent.net/script' \
@@ -43,6 +63,9 @@ curl --location --request POST 'https://vpdemo.inteliquent.net/script' \
 </script>'
 ```
 
+Groundwire Free Code
+Configuration via QR
+QR Code
 
 ## API Documentation
 
