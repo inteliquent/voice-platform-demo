@@ -1,36 +1,66 @@
-# Voice Platform API Demo
+# Voice Platform Demo
 
 ## Overview 
 
-This document is intended for prospective Inteliquent Voice Platform API customers and allows these customers to test out the platorm and gain basic understanding of the platform's capabilities.
+Learn to use Voice Platform to script the flow of inbound and outbound phone calls. Build a phone menu, forward, record, connect, conference.
 
-## Setup
+This enables you to build phone systems that intelligently route inbound calls, provide automated self-service for common support calls, record the interaction between parties, seamlessly transfer a call between agents, and more. 
 
-### Demo Environment
+## Getting Started
 
-The [Inteliquent Customer Portal](https://portal.inteliquent.com) is the web based tool that our you usemanage your account with us. 
+Once we have created your demo phone number and API key you are ready to get started.
 
-#### Credientials
-Username: demo@customer.info 
-Password: [Find here]
+Please [contact us](mailto:sales@inteliquent.com) if you don't have this and wish to demo the platform. The [Inteliquent Customer Portal](https://portal.inteliquent.com) is the web based tool that our you usemanage your account with us. 
 
-### SIP Trunks
+#### Example Credientials
 
-### API Documentation
+- Username: `customer@domain.com` 
+- API Keys: `39893lke009l`
+- Password: `Welcome123!`
 
-[Inteliscript API Guide](https://inteliscript.docs.apiary.io/)
+#### Creating a Script
 
-### Demo Dashboard?
+```xml
+<script>
+    <head/>
+    <body>
+        <!-- The action and event elements -->
+    </body>
+</script>
+```
 
-## Test Service
+#### Submit your script
 
-### Groundwire / Cloudsoftphone
+```bash
+curl --location --request POST 'https://vpdemo.inteliquent.net/script' \
+--header 'Content-Type: application/xml' \
+--header 'Accept: application/xml' \
+--data-raw '<script>
+    <head/>
+    <body>
+        <!-- The action and event elements -->
+    </body>
+</script>'
+```
 
-## Examples
 
-## External Registration
+## API Documentation
 
+- [Inteliscript API Guide](https://inteliscript.docs.apiary.io/)
+- [Creating a menu](https://inteliscript.docs.apiary.io/)
+- [Recording a call](https://inteliscript.docs.apiary.io/)
 
+## Testing
+
+### with Groundwire / Cloudsoftphone
+
+Download a client
+How to configure with your phone number
+Scan this QR code
+
+## Features
+
+External Registration
 
 ### Ryan Notes
 * production demo env
