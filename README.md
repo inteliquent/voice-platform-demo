@@ -77,7 +77,7 @@ QR Code
 
 ### with Groundwire / Cloudsoftphone
 
-Download a client
+Download a `Petr added this` client
 How to configure with your phone number
 Scan this QR code
 
