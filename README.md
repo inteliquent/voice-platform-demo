@@ -1,99 +1,89 @@
-# Voice Platform Demo
+# IQ VOICE PLATFORM SALES DEMO
+## Demo demo scripts
+This repository contains instructions that a interested Inteliquent cusotmer can follow to test various capabilities of the Inteliquent Voice Platform. This demo includes use of an Acrobits SIP client to demonstrate the full E2E capability of Inteliquent including the Network-the Platform-the Client. 
 
-## Overview 
+### Disclaimer
+This should be used for domonstrations only, any audio recording created during this demo will be accessible to others with the same webhook link!
 
-Learn to use Voice Platform to script the flow of inbound and outbound phone calls. Build a phone menu, forward, record, connect, conference.
+### Doorman app demo
+The doorman app demonstrates the following platform/client capabilities:
+- Call Recording
+- DTMF
+- Call Forwarding
+- Webhooks
+- Call Insights
+- Playing of Media to only a specified call leg
+- SIP Registration
+- Push Notifications (SIPIS)
+- Acrobits Client
 
-This enables you to build phone systems that intelligently route inbound calls, provide automated self-service for common support calls, record the interaction between parties, seamlessly transfer a call between agents, and more. 
 
-## Getting Started
+This script ([Inteqliquent Doorman demo](sample/doorman_demo.xml)) accomplishes the following use-case:
 
-Once we have created your demo phone number and API key you are ready to get started.
+Call Screening app that informs the receiving party of the caller's name and allows her to answer, answer with recording or send the call to voicemail. 
 
-Please [contact us](mailto:sales@inteliquent.com) if you don't have this and wish to demo the platform. The [Inteliquent Customer Portal](https://portal.inteliquent.com) is the web based tool that our you usemanage your account with us. 
+### Please follow the demo instructions below.
 
-#### Example Credientials
+1. Set up call forwarding for all calls to `7089827739` (on Verizon *727089827739 on AT&T or T-Mobile **21*17089827739#)
+2. Register Acrobits client ([Client Setup](##testing-with-a-sip-client)-described later in the document)
+3. Call your mobile number (one that has forwarding active) - call is forwarded to `7089827739` which is an Inteliqent number with Voice Platform capabilities enabled.
+4. The call arrives to Inteliquent Voice Platform (the script is attached to the number above)
+5. Voice Plaform checks that this is a forwarded call.
+6. “Doorman functionality” script is triggered and plays prompt saying “Hi! This number is using Inteliquent to screen its calls. Please say your first and last names and the purpose of your call after the beep. Then I'll try to connect you.” + Beep sound
+7. Record the message (8 seconds) after recording stops caller hears “Thanks”
+8. Caller hears ringing
+9. Call is made to the registered Groundwire client and the client rings
+10. When you answer the incoming call  the following message is played “ Call from” + recording is played + Press 1 to answer; press 2 to answer with recording enabled; press 3 to send the call to voicemail; press 4 to reject or simply hangup.
 
-- Username: `customer@domain.com` 
-- API Keys: `39893lke009l`
-- Password: `Welcome123!`
+- If `1` is pressed the call is connected
+- If `2` is pressed the call is connected and both parties hear "This call is being recorded, to stop the recording press 6 at any time" when either party hangs up or presses #6 the audio file with the recording is posted to this site https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4
+- If `3` is pressed the caller is sent to voicemail and link to file is posted to this site https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4
+- If `4` is pressed call is ended
 
-#### Creating a Script
 
-```xml
-<script>
-    <head/>
-    <body>
-        <!-- The action and event elements -->
-    </body>
-</script>
-```
+## Testing with a SIP Client
 
-#### Submit your script
-- demo.vp.sip.global
-- New demo number
-- Limited API key
+The script is configured to dial out to a registered SIP User App. To test this functionality, download the "Groundwire" App in the [Apple App Store](https://apps.apple.com/us/app/acrobits-groundwire/id378503081) or [Google Play Store](https://play.google.com/store/apps/details?id=cz.acrobits.softphone.aliengroundwire&hl=en_US).
 
-*Question: Does this environment need to be isolated?*
+**NOTE:** Ask your sales represenative for Groundwire  app `promo` codes
 
-#### Credientials
+### Configuring the client for registration
 
-- Username: demo@customer.info 
-- Password: [Find here]
-- API Key: [Generated]
+Open the app and go to Keypad -> Click the settings icon in the upper right hand corner -> Accounts -> +  -> Generic SIP Account:
 
-Using the Voice Platform Demo portal. A new account and credentials were provisioned for this demo customer.
+1. Name your account
+2. Username: Cellphone number in E.164 format. This is the cellphone that has forwarding active in the examples above (e.g. +17201234567)
+3. Password: {will be provided separately}
+4. Domain: Demo-poc.vp.sip.global
+5. Save
 
-### Examples
+Example of the account screen is below
 
-### API Documentation
+![Add account in Groundwire](https://github.com/inteliquent/vp-script-demo/blob/master/Media/IMG_F56DC9341644-1.jpeg)
 
-- voice-platform-demo.inteliquent.net
-- [Inteliscript API Guide](https://inteliscript.docs.apiary.io/)
 
-```bash
-curl --location --request POST 'https://vpdemo.inteliquent.net/script' \
---header 'Content-Type: application/xml' \
---header 'Accept: application/xml' \
---data-raw '<script>
-    <head/>
-    <body>
-        <!-- The action and event elements -->
-    </body>
-</script>'
-```
 
-Groundwire Free Code
-Configuration via QR
-QR Code
+### Configuring client for Push Notifications
 
-## API Documentation
+1. In the **Goundwire** go to your `account`
+2. select `Advanced Settings`
+3. select `Push Options`
+4. go to `Private SIPIS` section and configure following values:
+    
+   * **SIPIS host** - `sipis.sip.global`
+   * **SIPIS registrar**  -`all.sipis.sip.global`
+   * **SIPIS prefix length** - `1`
+5. select `Done`
+6. Your app is now configured to receive push notifications when backgrounded.
 
-- [Inteliscript API Guide](https://inteliscript.docs.apiary.io/)
-- [Creating a menu](https://inteliscript.docs.apiary.io/)
-- [Recording a call](https://inteliscript.docs.apiary.io/)
+**NOTE:** for more on Push Notifications click here [SIPIS](https://doc.acrobits.net/sipis/index.html)
 
-## Testing
+## Further Documentation
 
-### with Groundwire / Cloudsoftphone
+Documentation on Voice API XML functionality can be found here:
 
-Download a `Goundwire` client
-How to configure with your phone number
-Scan this QR code
+https://inteliscript.docs.apiary.io/#
 
-## Features
+Acrobits API:
 
-External Registration
-
-### Ryan Notes
-* production demo env
-* no specific domain
-* using our trunks
-* links to documentation (use a new inteliquent domain)
-* sales person centric
-* test our product with this link (gw code?)
-* similar to Robokiller app
-* auto-registration (pass through)
-* concerte usable examples
-* ask customer how could we ramp you faster
-* examples - highlight functionality
+https://doc.acrobits.net/index.html
