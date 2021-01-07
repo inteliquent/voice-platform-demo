@@ -24,7 +24,7 @@ Call Screening app that informs the receiving party of the caller's name and all
 
 ### Please follow the demo instructions below.
 
-1. Set up call forwarding for all calls to `7089827739` (on Verizon *727089827739 on AT&T or T-Mobile **21*17089827739#)
+1. Set up call forwarding for all calls to `7089827739` (on Verizon `*727089827739` on AT&T or `T-Mobile **21*17089827739#`)
 2. Register Acrobits client ([Client Setup](##testing-with-a-sip-client)-described later in the document)
 3. Call your mobile number (one that has forwarding active) - call is forwarded to `7089827739` which is an Inteliqent number with Voice Platform capabilities enabled.
 4. The call arrives to Inteliquent Voice Platform (the script is attached to the number above)
