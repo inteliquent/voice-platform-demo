@@ -69,7 +69,7 @@
                                         <join target='incoming_call'/>
                                         <stop-play target-group='announcement'/>
                                         <onJoin>
-                                            <say text="This call will be recorded from now on...">
+                                            <say text="This call is being recorded, to stop the recording press 5 at any time">
                                                 <onComplete>
                                                     <record alias='call_recording'>
                                                         <onComplete _link='LINK'>
@@ -79,14 +79,14 @@
                                                             </query>
                                                         </onComplete>
                                                     </record>
-                                                    <onDTMF digits='6'>
+                                                    <onDTMF digits='5'>
                                                         <stop-record target='call_recording'/>
                                                         <say text="Recording stopped."/>
                                                         <say text="Recording stopped." target='incoming_call'/>
                                                     </onDTMF>
                                                 </onComplete>
                                             </say>
-                                            <say text="This call will be recorded from now on..." target='incoming_call'/>
+                                            <say text="This call is being recorded" target='incoming_call'/>
                                         </onJoin>
                                     </onDTMF>
                                     <onDTMF digits='3'>
@@ -122,16 +122,11 @@
                             <hangup target='incoming_call'/>
                             <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
                                 <param name='disclaimer' value='This information is not private'/>
-                                <param name='callerId' value='{{INBOUND_CALLER_ID}}'/>
-                                <param name='calleeId' value='{{INBOUND_CALLEE_ID}}'/>
                                 <param name='diversion' value='{{@Diversion}}'/>
-                                <param name='requestUriParams' value='{{INBOUND_REQ_URI_PARAM}}'/>
                                 <param name='requestUriUser' value='{{INBOUND_REQ_URI_USER}}'/>
-                                <param name='scriptId' value='{{SCRIPT_ID}}'/>
                                 <param name='from' value='{{INBOUND_CALLER_NUMBER}}'/>
                                 <param name='to' value='{{INBOUND_CALLEE_NUMBER}}'/>
                                 <param name='p-asserted-identity' value='{{P-Asserted-Identity}}'/>
-                                <param name='xmppUri' value='{{XMPP_URI}}'/>
                             </query>
                         </onDisconnect>
                     </dial>
