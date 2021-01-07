@@ -53,7 +53,7 @@ Open the app and go to Keypad -> Click the settings icon in the upper right hand
 
 1. Name your account
 2. Username: Cellphone number in E.164 format. This is the cellphone that has forwarding active in the examples above (e.g. +17201234567)
-3. Password: {will be provided separately}
+3. Password: {contact your sales representative}
 4. Domain: inteliquent-demo.vp.sip.global
 5. Save
 
