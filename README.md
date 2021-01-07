@@ -54,13 +54,8 @@ Open the app and go to Keypad -> Click the settings icon in the upper right hand
 1. Name your account
 2. Username: Cellphone number in E.164 format. This is the cellphone that has forwarding active in the examples above (e.g. +17201234567)
 3. Password: {will be provided separately}
-4. Domain: Demo-poc.vp.sip.global
+4. Domain: inteliquent-demo.vp.sip.global
 5. Save
-
-Example of the account screen is below
-
-![Add account in Groundwire](https://github.com/inteliquent/vp-script-demo/blob/master/Media/IMG_F56DC9341644-1.jpeg)
-
 
 
 ### Configuring client for Push Notifications
