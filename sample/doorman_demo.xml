@@ -1,17 +1,153 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<script xmlns="urn:xmpp:layered:1">
-   <head />
-   <body>
-   	<accept alias="inbound"/>
-   	<ring/>
-   	<answer>
-   		<onConnect>
-   			<say text="Hello. Goodbye .">
-   				<onComplete>
-   					<hangup/>
-   				</onComplete>
-   			</say>
-   		</onConnect>
-	</answer>
+<script debug-callback='rabbitmq:executor-debug'>
+    <head/>
+    <body>
+        <snippet id='doorman'>
+            <ring/>
+            <answer>
+                <onConnect>
+                    <onDTMF digits='{{PIN}}'>
+                        <snippet id='record_and_call_customer'/>
+                        <snippet id='call_customer'/>
+                        <stop-play target-group='announcement'/>
+                        <dial caller='{{INBOUND_CALLER_ID}}' number='{{DESTINATION}}' alias='forwarded_call'>
+                            <header name='X-Global' value='true'/>
+                            <header name='X-test' value='{{INBOUND_CALLEE_NUMBER}}'/>
+                            <onConnect>
+                                <join target='incoming_call'/>
+                            </onConnect>
+                            <onDisconnect>
+                                <hangup target='incoming_call'/>
+                            </onDisconnect>
+                        </dial>
+                    </onDTMF>
+                    <timeout seconds='1'>
+                        <onComplete>
+                            <say text="Hi! You have reached Inteliquent's Doorman demo. Please say your first and last names and the purpose of your call after the beep. Then I'll try to connect you." group='announcement'>
+                                <onComplete>
+                                    <record_and_call_customer/>
+                                </onComplete>
+                            </say>
+                        </onComplete>
+                    </timeout>
+                </onConnect>
+                <onDisconnect>
+                    <hangup target='forwarded_call'/>
+                </onDisconnect>
+            </answer>
+        </snippet>
+        <snippet id='record_and_call_customer'>
+            <play src='http://s3.us-east-2.amazonaws.com/vp-waves/beep.wav'>
+                <onComplete>
+                    <record final-timeout='1000' max-duration='8000'>
+                        <onComplete ref='LOCAL_FILE'>
+                            <call_customer/>
+                        </onComplete>
+                    </record>
+                </onComplete>
+            </play>
+        </snippet>
+        <snippet id='call_customer'>
+            <say text="Thanks.">
+                <onComplete>
+                    <play src='https://www.soundjay.com/phone/sounds/phone-calling-1.mp3' repeat='10' group='announcement'/>
+                    <dial caller='{{INBOUND_CALLER_ID}}' number='{{DESTINATION}}' alias='forwarded_call'>
+                        <header name='X-Global' value='true'/>
+                        <onConnect>
+                            <say text="Call from...">
+                                <onComplete>
+                                    <play src='{{LOCAL_FILE}}' group='announcement'>
+                                        <onComplete>
+                                            <say group='announcement' text="Press 1 to answer; press 2 to answer with recording enabled; press 3 to send the call to voicemail; press 4 to reject or simply hangup."/>
+                                        </onComplete>
+                                    </play>
+                                    <flush event='onDTMF'/>
+                                    <onDTMF digits='1'>
+                                        <join target='incoming_call'/>
+                                        <stop-play target-group='announcement'/>
+                                    </onDTMF>
+                                    <onDTMF digits='2'>
+                                        <join target='incoming_call'/>
+                                        <stop-play target-group='announcement'/>
+                                        <onJoin>
+                                            <say text="This call will be recorded from now on...">
+                                                <onComplete>
+                                                    <record alias='call_recording'>
+                                                        <onComplete _link='LINK'>
+                                                            <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
+                                                                <param name='recording' value='{{LINK}}'/>
+                                                                <param name='description' value="Call recording"/>
+                                                            </query>
+                                                        </onComplete>
+                                                    </record>
+                                                    <onDTMF digits='6'>
+                                                        <stop-record target='call_recording'/>
+                                                        <say text="Recording stopped."/>
+                                                        <say text="Recording stopped." target='incoming_call'/>
+                                                    </onDTMF>
+                                                </onComplete>
+                                            </say>
+                                            <say text="This call will be recorded from now on..." target='incoming_call'/>
+                                        </onJoin>
+                                    </onDTMF>
+                                    <onDTMF digits='3'>
+                                        <stop-play target-group='announcement'/>
+                                        <hangup target='forwarded_call'/>
+                                        <onDisconnect>
+                                            <say alias="voicemail_action_say" TEXT="Please leave a message after the beep." target='incoming_call'>
+                                                <onComplete>
+                                                    <play src='https://s3.us-east-2.amazonaws.com/vp-waves/beep.wav'>
+                                                        <onComplete>
+                                                            <record alias='call_recording'>
+                                                                <onComplete _link='LINK'>
+                                                                    <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
+                                                                        <param name='disclaimer' value='This information is not private'/>
+                                                                        <param name='recording' value='{{LINK}}'/>
+                                                                        <param name='description' value="IQNT Demo voicemail"/>
+                                                                    </query>
+                                                                </onComplete>
+                                                            </record>
+                                                        </onComplete>
+                                                    </play>
+                                                </onComplete>
+                                            </say>
+                                        </onDisconnect>
+                                    </onDTMF>
+                                    <onDTMF digits='4'>
+                                        <hangup/>
+                                    </onDTMF>
+                                </onComplete>
+                            </say>
+                        </onConnect>
+                        <onDisconnect>
+                            <hangup target='incoming_call'/>
+                            <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
+                                <param name='disclaimer' value='This information is not private'/>
+                                <param name='callerId' value='{{INBOUND_CALLER_ID}}'/>
+                                <param name='calleeId' value='{{INBOUND_CALLEE_ID}}'/>
+                                <param name='diversion' value='{{@Diversion}}'/>
+                                <param name='requestUriParams' value='{{INBOUND_REQ_URI_PARAM}}'/>
+                                <param name='requestUriUser' value='{{INBOUND_REQ_URI_USER}}'/>
+                                <param name='scriptId' value='{{SCRIPT_ID}}'/>
+                                <param name='from' value='{{INBOUND_CALLER_NUMBER}}'/>
+                                <param name='to' value='{{INBOUND_CALLEE_NUMBER}}'/>
+                                <param name='p-asserted-identity' value='{{P-Asserted-Identity}}'/>
+                                <param name='xmppUri' value='{{XMPP_URI}}'/>
+                            </query>
+                        </onDisconnect>
+                    </dial>
+                </onComplete>
+            </say>
+        </snippet>
+        <accept alias='incoming_call'>
+            <match a='{{Diversion-Top}}' b='' type='equals'>
+                <onTrue>
+                    <hangup reason='rejected'/>
+                </onTrue>
+                <onFalse>
+                    <save key='DESTINATION' value='sip:{{@Diversion-Top}}@inteliquent-demo.vp.sip.global'/>
+                    <doorman PIN='123'/>
+                </onFalse>
+            </match>
+        </accept>
     </body>
 </script>
