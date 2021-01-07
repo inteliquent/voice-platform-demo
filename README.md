@@ -36,7 +36,7 @@ Call Screening app that informs the receiving party of the caller's name and all
 10. When you answer the incoming call  the following message is played “ Call from” + recording is played + Press 1 to answer; press 2 to answer with recording enabled; press 3 to send the call to voicemail; press 4 to reject or simply hangup.
 
 - If `1` is pressed the call is connected
-- If `2` is pressed the call is connected and both parties hear "This call is being recorded, to stop the recording press 6 at any time" when either party hangs up or presses #6 the audio file with the recording is posted to this site https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4
+- If `2` is pressed the call is connected and both parties hear "This call is being recorded, to stop the recording press 5 at any time" when either party hangs up or presses #6 the audio file with the recording is posted to this site https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4
 - If `3` is pressed the caller is sent to voicemail and link to file is posted to this site https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4
 - If `4` is pressed call is ended
 
