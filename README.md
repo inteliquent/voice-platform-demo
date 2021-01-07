@@ -1,6 +1,6 @@
-# Inteliquent Voice Platform demo
+# Inteliquent Voice Platform Demo
 ## Overview
-This repository contains instructions that an interested Inteliquent customer can follow to test various capabilities of the Inteliquent Voice Platform. This demo includes use of an Acrobits SIP client to demonstrate the full E2E capability of Inteliquent (Network-Platform-Client). Script that is used for the demo is included as well.
+This repository contains instructions that an interested Inteliquent customer can follow to test various capabilities of the Inteliquent Voice Platform. This demo includes use of the Acrobits SIP client to demonstrate the full E2E capability of Inteliquent (Network-Platform-Client). Script that is used for the demo is included as well.
 
 ### Disclaimer
 This app should be used for demonstrations only, any audio recording created during this demo as well as all the call related information will be sent to pubicly available URL and be visible for anyone with the URL information!
@@ -60,6 +60,8 @@ The script is configured to dial out to a registered SIP User App. To test this 
 
 **NOTE:** Ask your sales representative for Groundwire  app `promo` codes
 
+**NOTE:** Acrobits also offers SDK that customers can embed into their app
+
 ### Configuring the client for registration
 
 Open the app and go to Keypad -> Click the settings icon in the upper right hand corner -> Accounts -> +  -> Generic SIP Account:
@@ -92,6 +94,8 @@ Inteliquent Voice Platform REST API:
 
 https://inteliscript.docs.apiary.io/#
 
-Acrobits API:
+Acrobits:
 
+https://www.acrobits.net/
 https://doc.acrobits.net/index.html
+
