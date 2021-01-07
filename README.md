@@ -1,9 +1,9 @@
-# IQ VOICE PLATFORM SALES DEMO
-## Demo demo scripts
-This repository contains instructions that a interested Inteliquent cusotmer can follow to test various capabilities of the Inteliquent Voice Platform. This demo includes use of an Acrobits SIP client to demonstrate the full E2E capability of Inteliquent including the Network-the Platform-the Client. 
+# Inteliquent VOICE PLATFORM DEMO
+## Demo scripts
+This repository contains instructions that an interested Inteliquent cusotmer can follow to test various capabilities of the Inteliquent Voice Platform. This demo includes use of an Acrobits SIP client to demonstrate the full E2E capability of Inteliquent (Network-Platform-Client). 
 
 ### Disclaimer
-This should be used for domonstrations only, any audio recording created during this demo will be accessible to others with the same webhook link!
+This app should be used for domonstrations only, any audio recording created during this demo will be accessible to aynone with the same webhook link!
 
 ### Doorman app demo
 The doorman app demonstrates the following platform/client capabilities:
