@@ -25,7 +25,7 @@ The doorman app demonstrates the following platform/client capabilities:
 This demo uses the following XML script ([Inteqliquent Doorman demo](sample/doorman_demo.xml)) 
 
 
-## Step-by-Step instrcutions
+## Step-by-Step instructions
 
 ### Testing with a SIP Client
 
