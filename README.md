@@ -29,7 +29,7 @@ This demo uses the following XML script ([Inteqliquent Doorman demo](sample/door
 
 ### Testing with a SIP Client
 
-This demo requires a registered SIP client. We recommend that you use SIP client made by one of Inteliquent's brands -  Acrobits  called "Groundwire". You will find it in the [Apple App Store](https://apps.apple.com/us/app/acrobits-groundwire/id378503081) or [Google Play Store](https://play.google.com/store/apps/details?id=cz.acrobits.softphone.aliengroundwire&hl=en_US).
+This demo requires a registered SIP client. We recommend that you use SIP client made by Acrobits (Inteliquent brand)  called "Groundwire". You will find it in the [Apple App Store](https://apps.apple.com/us/app/acrobits-groundwire/id378503081) or [Google Play Store](https://play.google.com/store/apps/details?id=cz.acrobits.softphone.aliengroundwire&hl=en_US).
 
 **NOTE:** Ask your sales representative for Groundwire  app `promo` codes
 
