@@ -97,7 +97,7 @@ When the call finishes call related information including the following is poste
 
 ### Dashboard
 
-All Inteliquent Voice Platform customers have access to a custom dashboard that shows real time information regarding their traffic. Example of such dashboard (will show information regarding call generated in this demo) can be found here: https://p.datadoghq.com/sb/6e25311b3-fdf5071eeeb018205c8c828e9c5b8ce9
+All Inteliquent Voice Platform customers have access to a custom dashboard that shows real time information regarding their traffic. Example of such dashboard (will show information regarding calls generated in this demo) can be found here: https://p.datadoghq.com/sb/6e25311b3-fdf5071eeeb018205c8c828e9c5b8ce9
 
 
 
