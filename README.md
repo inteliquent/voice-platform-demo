@@ -43,7 +43,7 @@ Open the app and go to Keypad -> Click the settings icon or three dots for Andro
 6. If the registration was successful the registration status will be solid green.
 
 
-### Configuring client for Push Notifications
+### Configuring the client for push notifications
 
 1. In the **Groundwire** go to your `account`
 2. select `Advanced Settings`
