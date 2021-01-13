@@ -133,16 +133,15 @@
                 </onComplete>
             </say>
         </snippet>
-        <accept alias='incoming_call'>
-            <match a='{{Diversion-Top}}' b='' type='equals'>
-                <onTrue>
-                    <hangup reason='rejected'/>
-                </onTrue>
-                <onFalse>
-                    <save key='DESTINATION' value='sip:{{@Diversion-Top}}@inteliquent-demo.vp.sip.global'/>
-                    <doorman PIN='123'/>
-                </onFalse>
-            </match>
-        </accept>
+        <accept alias='incoming_call'/>
+        <match a='{{Diversion-Top}}' b='' type='equals'>
+            <onTrue>
+                <hangup reason='rejected'/>
+            </onTrue>
+            <onFalse>
+                <save key='DESTINATION' value='sip:{{@Diversion-Top}}@inteliquent-demo.vp.sip.global'/>
+                <doorman PIN='123'/>
+            </onFalse>
+        </match>
     </body>
 </script>
