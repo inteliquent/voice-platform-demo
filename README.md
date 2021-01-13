@@ -7,7 +7,7 @@ This app should be used for demonstrations only, any audio recording created dur
 
 ## Doorman app demo
 
-The demo consistes of a call screening app that informs the receiving party of the caller's name and gives the callee the choice to either  answer, answer with recording or to send the call to voicemail. 
+The demo consists of a call screening app that informs the receiving party of the caller's name and gives the callee the choice to either  answer, answer with recording or to send the call to voicemail. 
 
 The doorman app demonstrates the following platform/client capabilities:
 - Call Recording
@@ -33,7 +33,7 @@ This demo requires a registered SIP client. We recommend that you use SIP client
 
 ### Configuring the client for registration
 
-Open the app and go to Keypad -> Click the settings icon  or three dots for Andorid in the upper right hand corner -> Accounts -> +  -> Generic SIP Account:
+Open the app and go to Keypad -> Click the settings icon or three dots for Android in the upper right hand corner -> Accounts -> +  -> Generic SIP Account:
 
 1. Name your account
 2. `Username`: Your personal cellphone number in the following format  `+17201234567` - The `+` before the 1 is required
@@ -45,7 +45,7 @@ Open the app and go to Keypad -> Click the settings icon  or three dots for Ando
 
 ### Configuring client for Push Notifications
 
-1. In the **Goundwire** go to your `account`
+1. In the **Groundwire** go to your `account`
 2. select `Advanced Settings`
 3. select `Push Options`
 4. go to `Private SIPIS` section and configure following values:
@@ -66,9 +66,9 @@ Now that you have a registered client we can proceed to the actual demo:
 
 - VZW -  `*727089827739`
 - AT&T or T-Mobile -  `**21*17089827739#`)
-2. Call your mobile number (one that has forwarding active) - call is forwarded to `708-982-7739` which is an Inteliqent number with Voice Platform capabilities enabled.
-3. The call arrives to Inteliquent Voice Platform and the following script is triggered: ([Inteqliquent Doorman demo](sample/doorman_demo.xml)) 
-4. Voice Plaform checks that this is a forwarded call.
+2. Call your mobile number (one that has forwarding active) - call is forwarded to `708-982-7739` which is an Inteliquent number with Voice Platform capabilities enabled.
+3. The call arrives to Inteliquent Voice Platform and the following script is triggered: ([Inteliquent Doorman demo](sample/doorman_demo.xml)) 
+4. Voice Platform checks that this is a forwarded call.
 5. “Doorman functionality” is triggered and plays prompt saying “Hi! You have reached Inteliquent's Doorman demo. Please say your first and last names and the purpose of your call after the beep. Then I'll try to connect you.” 
 6. Record the message (8 seconds) after recording stops caller hears “Thanks”
 7. Caller hears ringing
