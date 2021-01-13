@@ -3,7 +3,7 @@
 This repository contains instructions that an interested Inteliquent customer can follow to test various capabilities of the Inteliquent Voice Platform. This demo includes use of the Acrobits SIP client to demonstrate the full E2E capability of Inteliquent (Network-Platform-Client). Script that is used for the demo is included as well.
 
 ## Disclaimer
-This app should be used for demonstrations only, any audio recording created during this demo as well as all the call related information will be sent to pubicly available URL and be visible for anyone with the URL information!
+This app should be used for demonstrations only, any audio recording created during this demo as well as all the call related information will be sent to publicly available URL and be visible for anyone with the URL information!
 
 ## Doorman app demo
 
