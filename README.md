@@ -1,6 +1,6 @@
 # Inteliquent Voice Platform Developer Resource
 ## Overview
-This repository is intended to provide developers, who are looking to develop their applicaitons on the Inteliquent Voice Platform, with useful code from basic building blocks to entire apps. Our goals as the Inteliquent team is to get your development team to a useful code as fast as possible. 
+This repository is intended to provide developers, who are looking to develop their applications on the Inteliquent Voice Platform, with useful code from basic building blocks to entire apps. Our goals as the Inteliquent team is to get your development team to a useful code as fast as possible. 
 
 
 ## Table of Content
@@ -20,11 +20,12 @@ Demos:
 
 
 
-#### Hello World <a href='#helloworld' id='helloworld' class='anchor' aria-hidden='true'></a>
+#### Hello World <a href='#helloworld' id='helloworld' class='anchor' aria-hidden='true'></a> [Helloworld.xml](/sample/helloworld.xml)
 
 1. Call is answered
 2. "Hello World" text is played after text-to-speech conversion.
 3. Call is hung-up
+
 
 #### Forward call to SIP URI <a href='#sipuri' id='sipuri' class='anchor' aria-hidden='true'></a>
 
