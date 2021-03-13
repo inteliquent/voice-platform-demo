@@ -1,6 +1,6 @@
 # Inteliquent Voice Platform Developer Resource
 ## Overview
-This repository is intended to provide developers, who are looking to develop their applications on the Inteliquent Voice Platform, with useful code from basic building blocks to entire apps. Our goals as the Inteliquent team is to get your development team to a useful code as fast as possible. 
+This repository is intended to provide developers, who are looking to develop their applications on the Inteliquent Voice Platform, with useful code from basic building blocks to entire apps. Our goal at Inteliquent  is to get your development team to a useful code as fast as possible. 
 
 
 ## Table of Content
