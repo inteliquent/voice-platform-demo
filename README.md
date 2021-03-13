@@ -9,11 +9,21 @@ This repository is intended to provide developers, who are looking to develop th
 
 Code Snippets
 - [Hello World](#helloworld)
+- [Hello World w/ callback](#callback)
 - [Forward call to SIP URI](#sipuri)
 - [Forward call to another number](#number)
+- [Forward call to registered SIP client](#regclientin)
+- [Dial from registered client](#regclientout)
+- [Snippets](#snippets)
+- [Record something](#record)
+- [Record something in your GCP storage](#gcp)
+- [Voicemail](#voicemail)
+- [Outbound A2P call](#a2p)
+- [IVR](#ivr)
+- [Audio Forking](#forking)
+- [Live transcription](#livetranscription)
+- [Keywordspotter](#keyword)
 
-- DTMF
-- Call Forwarding
 
 Demos:
 - [Doorman app](README_doorman_demo.md)
