@@ -1,0 +1,32 @@
+<script>
+    <head/>
+    <body>
+    <auth id='my_id' type='gcp' value='service key that has been converted to Base64 string'/>
+        <snippet id='record_and_playback'>
+            <say text="Say something after the beep and we will record it and play it back to you">
+                <onComplete>
+                    <play src='http://s3.us-east-2.amazonaws.com/vp-waves/beep.wav'>
+                        <onComplete>
+                            <record auth='my_id' max-duration='10000' bucket='flexible_bucket' sync='true' format="mp3">
+                                <onComplete _link='LOCAL_FILE'>
+                                    <play src='{{LOCAL_FILE}}'>
+                                        <onComplete>
+                                            <hangup/>
+                                        </onComplete>
+                                    </play>
+                                </onComplete>
+                            </record>
+                        </onComplete>
+                    </play>
+                </onComplete>
+            </say>
+        </snippet>
+        <accept/>
+        <ring/>
+        <answer>
+            <onConnect>
+                <record_and_playback/>
+            </onConnect>
+        </answer>
+    </body>
+</script>
