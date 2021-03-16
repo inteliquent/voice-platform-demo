@@ -1,0 +1,23 @@
+<script>
+    <head/>
+    <body>
+        <accept/>
+        <ring/>
+        <answer>
+            <onConnect>
+                <say text="Hello World">
+                    <onComplete>
+                        <hangup/>
+                            <query url='webhook URL' method='post'>
+                                <param name='diversion' value='{{@Diversion}}'/>
+                                <param name='requestUriUser' value='{{INBOUND_REQ_URI_USER}}'/>
+                                <param name='from' value='{{INBOUND_CALLER_NUMBER}}'/>
+                                <param name='to' value='{{INBOUND_CALLEE_NUMBER}}'/>
+                                <param name='p-asserted-identity' value='{{P-Asserted-Identity}}'/>
+                            </query>
+                    </onComplete>
+                </say>
+            </onConnect>
+        </answer>
+    </body>
+</script>

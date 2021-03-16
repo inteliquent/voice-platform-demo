@@ -1,0 +1,29 @@
+<script>
+    <head/>
+    <body>
+        <accept alias="from_pstn"/>
+        <ring/>
+        <dial caller='{{INBOUND_CALLER_ID}}' number='sip:user@sipdomain.org' alias="to_sip_client">
+            <onConnect>
+                <answer target='from_pstn'>
+                    <onConnect>
+                        <join target='to_sip_client'>
+                            <onLeave>
+                                <hangup target='from_pstn'/>
+                                <hangup target='to_sip_client'/>
+                            </onLeave>
+                        </join>
+                    </onConnect>
+                    <onDisconnect>
+                        <hangup target='from_pstn'/>
+                        <hangup target='to_sip_client'/>
+                    </onDisconnect>
+                </answer>
+            </onConnect>
+        </dial>
+        <onDisconnect>
+            <hangup target='from_pstn'/>
+            <hangup target='to_sip_client'/>
+        </onDisconnect>
+    </body>
+</script>

@@ -1,0 +1,19 @@
+<script>
+    <head/>
+    <body>
+        <snippet id='helloworld'>
+            <say text="Hello World"/>
+        </snippet>
+        <accept/>
+        <ring/>
+        <answer>
+            <onConnect>
+                <helloworld>
+                    <onComplete>
+                        <hangup/>
+                    </onComplete>
+                </helloworld>
+            </onConnect>
+        </answer>
+    </body>
+</script>

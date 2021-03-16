@@ -14,7 +14,7 @@ Code Snippets
 - [Forward call to another number](#number)
 - [Forward call to registered SIP client](#regclientin)
 - [Dial from registered client](#regclientout)
-- [Snippets](#snippets)
+- [Snippets](#snippet)
 - [Record something](#record)
 - [Record something in your GCP storage](#gcp)
 - [Voicemail](#voicemail)

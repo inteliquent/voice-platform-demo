@@ -1,0 +1,36 @@
+<script>
+    <head/>
+    <body>
+        <accept alias="reg_client_out"/>
+        <ring/>
+        <dial caller='{{INBOUND_CALLER_ID}}' number='{{INBOUND_CALLEE_NUMBER}}' alias="PSTN_leg">
+            <onConnect>
+                <answer target='reg_client_out'>
+                    <onConnect>
+                        <join target='PSTN_leg'>
+                            <onJoin>
+                                <cancel-timeout target='ring-timeout'/>
+                            </onJoin>
+                            <onLeave>
+                                <hangup target="PSTN_leg"/>
+                                <hangup target="reg_client_out"/>
+                            </onLeave>
+                            <onDisconnect>
+                                <hangup target="PSTN_leg"/>
+                                <hangup target="reg_client_out"/>
+                            </onDisconnect>
+                        </join>
+                    </onConnect>
+                    <onDisconnect>
+                        <hangup target="PSTN_leg"/>
+                        <hangup target="reg_client_out"/>
+                    </onDisconnect>
+                </answer>
+            </onConnect>
+        </dial>
+        <onDisconnect>
+            <hangup target="PSTN_leg"/>
+            <hangup target="reg_client_out"/>
+        </onDisconnect>
+    </body>
+</script>
