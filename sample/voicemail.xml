@@ -1,0 +1,119 @@
+<script>
+    <head/>
+    <body>
+        <snippet id='voicemail'>
+            <cancel-timeout target='ring-timeout'/>
+            <answer target='pstn_inbound'>
+                <onConnect>
+                    <timeout seconds='1'>
+                        <onComplete>
+                            <say alias="voicemail_action_say" TEXT="Please leave a message after the beep." target='pstn_inbound'>
+                                <onComplete>
+                                    <play src='https://s3.us-east-2.amazonaws.com/vp-waves/beep.wav'>
+                                        <onComplete>
+                                            <record alias='call_recording' max-duration='60000' >
+                                                <onComplete _link='LINK'>
+                                                    <query url='webhook URL' method='post'>
+                                                        <param name='recording_URL' value='{{LINK}}'/>
+                                                        <param name='to' value='{{INBOUND_CALLEE_NUMBER}}'/>
+                                                        <param name='from' value='{{INBOUND_CALLER_NUMBER}}'/>
+                                                        <param name='description' value="IQNT rmc voicemail"/>
+                                                        <hangup target="pstn_inbound"/>
+                                                        <hangup target="client_leg"/>
+                                                    </query>
+                                                </onComplete>
+                                            </record>
+                                        </onComplete>
+                                    </play>
+                                </onComplete>
+                            </say>
+                        </onComplete>
+                    </timeout>
+                </onConnect>
+            </answer>
+        </snippet>
+        <accept alias="pstn_inbound"/>
+        <ring/>
+        <dial caller='{{INBOUND_CALLER_ID}}' number='sip:{{@INBOUND_CALLEE_NUMBER}}@customerdomain.vp.sip.global' alias="client_leg">
+            <onConnect>
+                <answer target='pstn_inbound'>
+                    <onConnect>
+                        <join target='client_leg'>
+                            <onJoin>
+                                <cancel-timeout target='ring-timeout'/>
+                            </onJoin>
+                            <onLeave>
+                                <hangup target="pstn_inbound"/>
+                                <hangup target="client_leg"/>
+                            </onLeave>
+                        </join>
+                    </onConnect>
+                    <onDisconnect>
+                        <hangup target="pstn_inbound"/>
+                        <hangup target="client_leg"/>
+                    </onDisconnect>
+                </answer>
+            </onConnect>
+            <onDisconnect platform-code='16'>
+                <hangup target='pstn_inbound'/>
+                <hangup target="client_leg"/>
+            </onDisconnect>
+            <onDisconnect platform-code='17'>
+                <voicemail/>
+            </onDisconnect>
+            <onDisconnect platform-code='18'>
+                <!-- User was unreachable with sipis active -->
+                <voicemail/>
+            </onDisconnect>
+            <onDisconnect platform-code='21'>
+                <!-- User declined the call with the app open -->
+                <voicemail/>
+            </onDisconnect>
+            <onDisconnect platform-code='28'>
+                <!-- User voip token stored in sipis is wrong somehow -->
+                <voicemail/>
+            </onDisconnect>
+            <onDisconnect platform-code='88'>
+                <!-- User declined the call with sipis active -->
+                <voicemail/>
+            </onDisconnect>
+            <onDisconnect platform-code='102'>
+                <!-- User was unreachable with the app open -->
+                <voicemail/>
+            </onDisconnect>
+        </dial>
+        <onDisconnect platform-code='16'>
+            <hangup target='pstn_inbound'/>
+            <hangup target="client_leg"/>
+        </onDisconnect>
+        <onDisconnect platform-code='17'>
+            <voicemail/>
+        </onDisconnect>
+        <onDisconnect platform-code='18'>
+            <!-- User was unreachable with sipis active -->
+            <voicemail/>
+        </onDisconnect>
+        <onDisconnect platform-code='21'>
+            <!-- User declined the call with the app open -->
+            <voicemail/>
+        </onDisconnect>
+        <onDisconnect platform-code='28'>
+            <!-- User voip token stored in sipis is wrong somehow -->
+            <voicemail/>
+        </onDisconnect>
+        <onDisconnect platform-code='88'>
+            <!-- User declined the call with sipis active -->
+            <voicemail/>
+        </onDisconnect>
+        <onDisconnect platform-code='102'>
+            <!-- User was unreachable with the app open -->
+            <voicemail/>
+        </onDisconnect>
+        <timeout seconds='20' alias='ring-timeout'>
+            <onComplete>
+                <hangup target='client_leg'/>
+                <voicemail/>
+            </onComplete>
+        </timeout>
+    </body>
+</script>

@@ -1,4 +1,4 @@
-<script debug-callback='rabbitmq:executor-debug'>
+<script>
     <head/>
     <body>
         <snippet id='doorman'>

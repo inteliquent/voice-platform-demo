@@ -1,0 +1,32 @@
+<script>
+    <head />
+    <body>
+        <auth id='my_id' type='gcp' value='service key that has been converted to Base64 string'/>
+        <accept alias="inbound"/>
+        <ring/>
+        <answer>
+            <onConnect>
+                <say text="This is Keyword spotter application, it will send you webhook whenever you say either a Yes or a No">
+                    <onComplete>
+                        <record  max-duration="10000" target="inbound">
+                            <stream keywords="yes,no" protocol="GOOGLE_WORD_SPOTTER" webhook="web hook URL" auth="my_id">
+                                <onSpeak keyword="yes">
+                                    <query url="webhook URL" method="post">
+                                        <param name="stream" value="onSpeak"/>
+                                        <param name="word" value="yes"/>
+                                    </query>
+                                </onSpeak>
+                            </stream>
+                            <onComplete _link="LINK" _duration="DD">
+                                <query url="webhook URL" method="post">
+                                    <param name="test" value="{{LINK}}"/>
+                                </query>
+                                <hangup target="inbound"/>
+                            </onComplete>
+                        </record>
+                    </onComplete>
+                </say>
+            </onConnect>
+        </answer>
+    </body>
+</script>

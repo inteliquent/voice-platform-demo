@@ -1,0 +1,38 @@
+<script debug-callback='rabbitmq:executor-debug'>
+    <head/>
+    <body>
+        <auth id='my_id' type='gcp' value='service key that has been converted to Base64 string'/>
+        <accept alias="inbound_leg"/>
+        <ring/>
+        <answer target='inbound_leg'>
+            <onConnect>
+                <say text="This call may be recorded and transcribed for quality assurance">
+                    <onComplete>
+                        <record  max-duration="10000" >
+                            <stream protocol="GOOGLE_TRANSCRIPTION" interimResults="false" webhook="webhook URL" auth="my_id">
+                    </stream>
+                            <onComplete _link='LINK'>
+                                <hangup target="inbound_leg"/>
+                                <query url="webhook url" method="post">
+                                    <param name='recording' value='{{LINK}}'/>
+                                </query>
+                            </onComplete>
+                        </record>
+                    </onComplete>
+                </say>
+                <onLeave>
+                    <hangup target="inbound_leg"/>
+                </onLeave>
+                <onDisconnect>
+                    <hangup target="inbound_leg"/>
+                </onDisconnect>
+            </onConnect>
+            <onDisconnect>
+                <hangup target="inbound_leg"/>
+            </onDisconnect>
+        </answer>
+        <onDisconnect>
+            <hangup target="inbound_leg"/>
+        </onDisconnect>
+    </body>
+</script>

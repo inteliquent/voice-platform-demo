@@ -1,0 +1,109 @@
+<script>
+    <head/>
+    <body>
+        <snippet id='main_menu' limit='99'>
+            <flush event='onDTMF' target='inbound_test'/>
+            <say text="Please press any digit from 0 to 9" target="inbound_test" group='dialog'/>
+            <ready_dtmfs/>
+        </snippet>
+        <snippet id='ready_dtmfs' limit='99'>
+            <onDTMF digits='1'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 1" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='2'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 2" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='3'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 3" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='4'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 4" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='5'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 5" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='6'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 6" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='7'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 7" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='8'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 8" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='9'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 9" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF digits='0'>
+                <stop-play target-group='dialog'/>
+                <say text="You pressed a 0" group='dialog' target="inbound_test">
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </say>
+            </onDTMF>
+            <onDTMF>
+                <ready_dtmfs/>
+            </onDTMF>
+        </snippet>
+        <accept/>
+        <ring/>
+        <answer alias="inbound_test">
+            <onConnect>
+                <timeout seconds='1'>
+                    <onComplete>
+                        <main_menu/>
+                    </onComplete>
+                </timeout>
+            </onConnect>
+            <!-- <onDisconnect>
+                <hangup target="inbound_test"/>
+            </onDisconnect> -->
+        </answer>
+    </body>
+</script>

@@ -1,0 +1,14 @@
+<script>
+    <head/>
+    <body>
+        <dial caller='+17200000001' number='+17200000002' alias='a2p'>
+            <onConnect>
+                <say text="This is test A2P script!">
+                    <onComplete>
+                        <hangup target="a2p"/>
+                    </onComplete>
+                </say>
+            </onConnect>
+            </dial>
+    </body>
+</script>
