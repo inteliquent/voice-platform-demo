@@ -101,9 +101,6 @@
                     </onComplete>
                 </timeout>
             </onConnect>
-            <!-- <onDisconnect>
-                <hangup target="inbound_test"/>
-            </onDisconnect> -->
         </answer>
     </body>
 </script>

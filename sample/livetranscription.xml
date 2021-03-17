@@ -9,7 +9,7 @@
                 <say text="This call may be recorded and transcribed for quality assurance">
                     <onComplete>
                         <record  max-duration="10000" >
-                            <stream protocol="GOOGLE_TRANSCRIPTION" interimResults="false" webhook="webhook URL" auth="my_id">
+                            <stream protocol="GOOGLE_TRANSCRIPTION" interimResults="true" webhook="webhook URL" auth="my_id">
                     </stream>
                             <onComplete _link='LINK'>
                                 <hangup target="inbound_leg"/>

@@ -22,7 +22,7 @@ Code Snippets
 - [IVR](#ivr)
 - [Audio Forking](#forking)
 - [Live transcription](#livetranscription)
-- [Keywordspotter](#keyword)
+- [Key word spotter](#keyword)
 
 
 Demos:
@@ -113,8 +113,8 @@ Demos:
 #### Record something in your GCP bucket<a href='#gcp' id='gcp' class='anchor' aria-hidden='true'></a> [see xml](/sample/gcp.xml)
 
 
-1. Call is answered
-2. GCP authentication and account information is declared
+1. GCP authentication and account information is declared
+2. Call is answered
 3. `record_and_playback` snippet is called
 4. Text is converted to speech and played
 5. External Audio file with the "Beep" sound is played
@@ -153,3 +153,50 @@ Demos:
 3. Call is hung-up
 
 >Note : A2P calls are cURL calls to https://external-api.inteliquent.net/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
+
+#### IVR <a href='#ivr' id='ivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/ivr.xml)
+
+This code plays back the number pressed on your keypad.
+
+1. Snippet `main_menu` is declared
+2. Snippet `ready_dtmfs` is declared
+3. Call is answered
+4. Snippet `main_menu` is called
+5. All previous DTMF tones are flushed out
+6. Main Menu text is converted to speech and played
+7. Snippet `ready_dtmfs` is declared
+8. Users is asked to press keys 0-9 on their keypad
+9. Depending on the digit pressed the user hears `Your pressed digit`.
+10. User is returned to the main menu and can press any of the digits again.
+11. Limit of 99 loops is put on the IVR.
+
+#### Live transription <a href='#livetranscription' id='livetranscription' class='anchor' aria-hidden='true'></a> [see xml](/sample/livetranscription.xml)
+
+This code will answer a call, record what the caller says and return the transcription to caller in real time
+
+1. GCP authentication and account information is declared
+2. Call is answered
+3. Dislaimer prompt is played to the caller
+4. Recording with max duration of 10 seconds is started
+5. Live transcription is started that provides results back every 1s to the specified webhook URL.
+6. Upon expiration of 10 second timer call is hung up
+7. Link to the recording is sent to specified webhook
+
+>Note 1: This service uses our integration with Google and requires Google Account.
+
+>Note 2: For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/stream)
+
+#### Key Word Spotter <a href='#keyword' id='keyword' class='anchor' aria-hidden='true'></a> [see xml](/sample/keyword.xml)
+
+This code will return webhook whenever specified word is uttered.
+
+1. GCP authentication and account information is declared
+2. Call is answered
+3. Prompt is played
+4. Recording with max duration of 10 seconds is started
+5. Key word spotting service is declared with spotting for words "Yes" and "No". 
+6. Webhook information for what information should be sent to webhook whenever each word is detected is specified.
+7. Upon expiration of 10 second timer call is hung up
+8. Link to the recording is sent to specified webhook
+
+>Note : For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/stream)

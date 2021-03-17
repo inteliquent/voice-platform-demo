@@ -16,10 +16,17 @@
                                         <param name="word" value="yes"/>
                                     </query>
                                 </onSpeak>
+                                <onSpeak keyword="no">
+                                    <query url="webhook URL" method="post">
+                                        <param name="stream" value="onSpeak"/>
+                                        <param name="word" value="no"/>
+                                    </query>
+                                </onSpeak>
                             </stream>
                             <onComplete _link="LINK" _duration="DD">
                                 <query url="webhook URL" method="post">
-                                    <param name="test" value="{{LINK}}"/>
+                                    <param name="recording" value="{{LINK}}"/>
+                                    <param name="duration" value="{{DD}}"/
                                 </query>
                                 <hangup target="inbound"/>
                             </onComplete>
