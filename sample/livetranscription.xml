@@ -1,4 +1,4 @@
-<script debug-callback='rabbitmq:executor-debug'>
+<script>
     <head/>
     <body>
         <auth id='my_id' type='gcp' value='service key that has been converted to Base64 string'/>
