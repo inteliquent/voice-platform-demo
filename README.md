@@ -20,7 +20,6 @@ Code Snippets
 - [Voicemail](#voicemail)
 - [Outbound A2P call](#a2p)
 - [IVR](#ivr)
-- [Audio Forking](#forking)
 - [Live transcription](#livetranscription)
 - [Key word spotter](#keyword)
 
