@@ -22,6 +22,7 @@ Code Snippets
 - [IVR](#ivr)
 - [Live transcription](#livetranscription)
 - [Key word spotter](#keyword)
+- [Busy](#busy)
 
 
 Demos:
@@ -199,3 +200,9 @@ This code will return webhook whenever specified word is uttered.
 8. Link to the recording is sent to specified webhook
 
 >Note: For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/stream)
+
+#### Busy Tone <a href='#busy' id='busy' class='anchor' aria-hidden='true'></a> [see xml](/sample/busy.xml)
+
+This code will play busy tone to the caller
+
+1. Plays busy tone without answering the call

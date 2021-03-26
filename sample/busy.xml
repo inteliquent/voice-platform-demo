@@ -1,0 +1,6 @@
+<script>
+    <head />
+    <body>
+        <hangup reason="busy" />
+    </body>
+</script>
