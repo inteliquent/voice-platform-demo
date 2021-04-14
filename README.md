@@ -30,7 +30,7 @@ Demos:
 - [Doorman app](README_doorman_demo.md)
 
 WebRTC SDK:
-- [.js to integrate your WebRTC client with Inteliquent](/sample/webrtcregistrationsdk.js)
+-  <a href='#webrtcsdk' id='webrtcsdk' class='anchor' aria-hidden='true'></a> [.js to integrate your WebRTC client with Inteliquent](/sample/webrtcregistrationsdk.js)
 
 #### Hello World <a href='#helloworld' id='helloworld' class='anchor' aria-hidden='true'></a> [see xml](/sample/helloworld.xml)
 
