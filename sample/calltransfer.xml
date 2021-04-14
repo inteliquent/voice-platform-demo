@@ -1,0 +1,87 @@
+<script>
+    <head/>
+    <body>
+        <snippet id='main_menu'>
+            <timeout seconds='1'>
+                <onComplete>
+                    <say text="Presss 1 to talk to SIP agent or press 2 to talk to WebRTC operator" target="PSTN_leg" alias="prompt">
+                    </say>
+                    <ready_dtmfs/>
+                </onComplete>
+            </timeout>
+        </snippet>
+        <snippet id='prepare_hangup_behavior_for_next_dial'>
+            <snippet id='hangup_behavior'>
+                <hangup target='webrtc_leg'/>
+                <hangup target='sip_leg'/>
+            </snippet>
+            <hangup target='webrtc_leg'/>
+            <hangup target='sip_leg'/>
+        </snippet>
+        <snippet id='modify_hangup_behavior'>
+            <snippet id='hangup_behavior'>
+                <hangup target='PSTN_leg'/>
+            </snippet>
+        </snippet>
+        <snippet id='ready_dtmfs'>
+            <flush event='onDTMF'/>
+            <onDTMF digits='1'>
+                <prepare_hangup_behavior_for_next_dial/>
+                <stop-play target='prompt'/>
+                <dial_sip/>
+            </onDTMF>
+            <onDTMF digits='2'>
+                <prepare_hangup_behavior_for_next_dial/>
+                <stop-play target='prompt'/>
+                <dial_webrtc/>
+            </onDTMF>
+            <onDTMF>
+                <ready_dtmfs/>
+            </onDTMF>
+            <onJoin>
+                <ready_dtmfs/>
+            </onJoin>
+        </snippet>
+        <snippet id='dial_mechanics'>
+            <modify_hangup_behavior/>
+            <onConnect>
+                <join target='PSTN_leg'/>
+            </onConnect>
+            <onLeave>
+                <hangup_behavior/>
+            </onLeave>
+        </snippet>
+        <snippet id='dial_sip'>
+            <say text="We are dialing the SIP agent, if at any point you would like to be transferred to the WebRTC operator you can press 2" target="PSTN_leg" alias="prompt">
+                <onComplete>
+                    <dial caller='{{INBOUND_CALLER_ID}}' number='sip:registeredsipuser@yourdomain.vp.sip.global' alias='sip_leg'>
+                        <dial_mechanics/>
+                    </dial>
+                </onComplete>
+            </say>
+        </snippet>
+        <snippet id='dial_webrtc'>
+            <say text="We are dialing Web R T C operator, if at any point you would like to be transferred to the SIP agent you can press 1" target="PSTN_leg" alias="prompt">
+                <onComplete>
+                    <dial caller='{{INBOUND_CALLER_ID}}' number='sip:registeredwebrtcclient@inteliquentdomain.com' alias="webrtc_leg">
+                        <dial_mechanics/>
+                    </dial>
+                </onComplete>
+            </say>
+        </snippet>
+        <accept alias='PSTN_leg'/>
+        <ring/>
+        <answer target='PSTN_leg'>
+            <onConnect>
+                <main_menu/>
+            </onConnect>
+            <onJoin>
+                <ready_dtmfs/>
+            </onJoin>
+            <onDisconnect>
+                <hangup target="webrtc_leg"/>
+                <hangup target="sip_leg"/>
+            </onDisconnect>
+        </answer>
+    </body>
+</script>

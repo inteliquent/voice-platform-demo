@@ -13,6 +13,7 @@ Code Snippets
 - [Forward call to SIP URI](#sipuri)
 - [Forward call to another number](#number)
 - [Forward call to registered SIP client](#regclientin)
+- [Transfer caller between two agents](#calltransfer)
 - [Dial from registered client](#regclientout)
 - [Snippet](#snippet)
 - [Record something](#record)
@@ -78,6 +79,16 @@ Demos:
 
 
 >Note 2: Client specific domains include the `vp.sip.global` suffix. Customer specific registration domain will be established during customer onboarding.
+
+#### Transfer caller between two agents <a href='#calltransfer' id='calltransfer' class='anchor' aria-hidden='true'></a> [see xml](/sample/calltransfer.xml)
+
+1. Caller hears IVR prompt
+2. Caller is instructed to press 1 or 2 
+3. Based on their choise SIP client (agent) or WebRTC client(operator) are dialed and connected
+4. Customer is provided with option of how to transfer call at any time.
+5. If customer pressed `1` and wishes to be transfered to WebRTC operator he can press `2`
+6. During the transfer the the other call leg is hung up.
+7. If caller hangs up all call legs are terminated
 
 #### Dial from registered SIP client <a href='#regclientout' id='regclientout' class='anchor' aria-hidden='true'></a> [see xml](/sample/regclientout.xml)
 
