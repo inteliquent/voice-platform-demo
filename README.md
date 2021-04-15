@@ -85,11 +85,11 @@ This repository is intended to provide developers, who are looking to develop th
 #### Transfer caller between two agents <a href='#calltransfer' id='calltransfer' class='anchor' aria-hidden='true'></a> [see xml](/sample/calltransfer.xml)
 
 1. Caller hears IVR prompt
-2. Caller is instructed to press 1 or 2 
-3. Based on their choise SIP client (agent) or WebRTC client(operator) are dialed and connected
+2. Caller is instructed to press `1` or `2` 
+3. Based on their choice SIP client (agent) or WebRTC client(operator) are dialed and connected
 4. Customer is provided with option of how to transfer call at any time.
-5. If customer pressed `1` and wishes to be transfered to WebRTC operator he can press `2`
-6. During the transfer the the other call leg is hung up.
+5. If customer pressed `1` and wishes to be transfered to WebRTC operator she can press `2`
+6. During the transfer the other call leg is hung up.
 7. If caller hangs up all call legs are terminated
 
 #### Dial from registered SIP client <a href='#regclientout' id='regclientout' class='anchor' aria-hidden='true'></a> [see xml](/sample/regclientout.xml)
