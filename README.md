@@ -29,8 +29,9 @@ Code Snippets
 Demos:
 - [Doorman app](README_doorman_demo.md)
 
-WebRTC SDK:
--  <a href='#webrtcsdk' id='webrtcsdk' class='anchor' aria-hidden='true'></a> [.js to integrate your WebRTC client with Inteliquent](/sample/webrtcregistrationsdk.js)
+WebRTC:
+- [SIP.js ](https://cdn.jsdelivr.net/npm/sip.js@0.12.0/dist/sip.min.js) SDK that can be used to integrate with Inteliquent 
+- Inteliquent specific Integration snippet  <a href='#webrtcsdk' id='webrtcsdk' class='anchor' aria-hidden='true'></a> [.js ](/sample/webrtcregistrationsdk.js)
 
 #### Hello World <a href='#helloworld' id='helloworld' class='anchor' aria-hidden='true'></a> [see xml](/sample/helloworld.xml)
 
