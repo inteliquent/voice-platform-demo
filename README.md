@@ -7,7 +7,7 @@ This repository is intended to provide developers, who are looking to develop th
 
 >Note: Each code snippet should be associated with an Inteliquent Number/Domain to function as described below.
 
-Code Snippets
+### Code Snippets
 - [Hello World](#helloworld)
 - [Hello World w/ callback](#callback)
 - [Forward call to SIP URI](#sipuri)
@@ -26,10 +26,10 @@ Code Snippets
 - [Busy](#busy)
 
 
-Demos:
+### Demos:
 - [Doorman app](README_doorman_demo.md)
 
-WebRTC:
+### WebRTC:
 - [SIP.js ](https://cdn.jsdelivr.net/npm/sip.js@0.12.0/dist/sip.min.js) SDK that can be used to integrate with Inteliquent 
 - Inteliquent specific Integration snippet  <a href='#webrtcsdk' id='webrtcsdk' class='anchor' aria-hidden='true'></a> [.js ](/sample/webrtcregistrationsdk.js)
 
