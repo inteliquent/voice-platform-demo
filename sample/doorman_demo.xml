@@ -1,6 +1,7 @@
 <script>
     <head/>
     <body>
+    <auth id='my_id' type='gcp' value='GCP key value here'/>
         <snippet id='doorman'>
             <ring/>
             <answer>
@@ -97,13 +98,28 @@
                                                 <onComplete>
                                                     <play src='https://s3.us-east-2.amazonaws.com/vp-waves/beep.wav'>
                                                         <onComplete>
-                                                            <record alias='call_recording'>
+                                                            <<record alias='call_recording' max-duration='20000'>
+                                                                <stream protocol="GOOGLE_TRANSCRIPTION" interimResults="false" webhook="https://webhook.site/a68530e9-5c21-44b6-bc8e-b8ad796a2609" language="en-US" useEnhanced="false" enableAutomaticPunctuation="true" speechModel="default" auth="my_id">
+                                                                    <onCompleteResult _text='TRANSCRIBED_TEXT'>
+                                                                        <query url='https://webhook.site/a68530e9-5c21-44b6-bc8e-b8ad796a2609' method='post'>
+                                                                            <param name='transcribed_text' value='{{TRANSCRIBED_TEXT}}'/>
+                                                                            <param name='from' value='{{@Diversion-Top}}'/>'
+                                                                        </query>
+                                                                    </onCompleteResult>
+                                                                </stream>
                                                                 <onComplete _link='LINK'>
                                                                     <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
                                                                         <param name='disclaimer' value='This information is not private'/>
                                                                         <param name='recording' value='{{LINK}}'/>
                                                                         <param name='description' value="IQNT Demo voicemail"/>
                                                                     </query>
+                                                                </onComplete>
+                                                                <onComplete reason='max-duration'>
+                                                                    <say text="Goodbye">
+                                                                        <onComplete>
+                                                                            <hangup/>
+                                                                        </onComplete>
+                                                                    </say>
                                                                 </onComplete>
                                                             </record>
                                                         </onComplete>
