@@ -48,16 +48,17 @@ Open the app and go to Keypad -> Click the settings icon or three dots for Andro
 
 ### Configuring the client for push notifications
 
-1. In the **Groundwire** go to your `account`
-2. select `Advanced Settings`
-3. select `Push Options`
-4. go to `Private SIPIS` section and configure following values:
+1. In the **Groundwire** app ho to `setting` -> `Incoming Call` -> select `Push Notifications`
+2. Also please go to your `account` that you created in the client configuration step above. 
+3. select `Advanced Settings`
+4. select `Push Options`
+5. go to `Private SIPIS` section and configure following values:
     
    * **SIPIS host** - `sipis.sip.global`
    * **SIPIS registrar**  -`all.sipis.sip.global`
    * **SIPIS prefix length** - `1`
-5. select `Done`
-6. Your app is now configured to receive push notifications when backgrounded.
+6. select `Done`
+7. Your app is now configured to receive push notifications when backgrounded.
 
 **NOTE:** for more on Push Notifications click here [SIPIS](https://doc.acrobits.net/sipis/index.html)
 
