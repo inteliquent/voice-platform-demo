@@ -48,7 +48,7 @@ Open the app and go to Keypad -> Click the settings icon or three dots for Andro
 
 ### Configuring the client for push notifications
 
-1. In the **Groundwire** app ho to `Settings` -> `Incoming Call` -> select `Push Notifications`
+1. In the **Groundwire** app go to `Settings` -> `Incoming Call` -> select `Push Notifications`
 2. Then go to `Settings` -> `Accoutns` -> select `Account that you created in the client configuration step above` 
 3. select `Advanced Settings`
 4. select `Push Options`
