@@ -48,8 +48,8 @@ Open the app and go to Keypad -> Click the settings icon or three dots for Andro
 
 ### Configuring the client for push notifications
 
-1. In the **Groundwire** app ho to `setting` -> `Incoming Call` -> select `Push Notifications`
-2. Also please go to your `account` that you created in the client configuration step above. 
+1. In the **Groundwire** app ho to `Settings` -> `Incoming Call` -> select `Push Notifications`
+2. Then go to `Settings` -> `Accoutns` -> select `Account that you created in the client configuration step above` 
 3. select `Advanced Settings`
 4. select `Push Options`
 5. go to `Private SIPIS` section and configure following values:
