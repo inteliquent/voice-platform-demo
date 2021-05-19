@@ -1,0 +1,29 @@
+<script>
+    <head/>
+    <body>
+        <accept alias="from_pstn"/>
+        <ring/>
+        <dial caller='{{INBOUND_CALLER_ID}}' number='+172012345678' alias="to_pstn_number">
+            <onConnect>
+                <answer target='from_pstn'>
+                    <onConnect>
+                        <join target='to_pstn_number'>
+                            <onLeave>
+                                <hangup target='from_pstn'/>
+                                <hangup target='to_pstn_number'/>
+                            </onLeave>
+                        </join>
+                    </onConnect>
+                    <onDisconnect>
+                        <hangup target='from_pstn'/>
+                        <hangup target='to_pstn_number'/>
+                    </onDisconnect>
+                </answer>
+            </onConnect>
+        </dial>
+        <onDisconnect>
+            <hangup target='from_pstn'/>
+            <hangup target='to_pstn_number'/>
+        </onDisconnect>
+    </body>
+</script>
