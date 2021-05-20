@@ -66,7 +66,7 @@ Open the app and go to Keypad -> Click the settings icon or three dots for Andro
 
 Now that you have a registered client we can proceed to the actual demo:
 
-1. Set up call forwarding on your cell phone to send all calls to `708-982-7739` by dialing the following:
+1. Set up call forwarding on your cell phone to send all calls to `708-982-7739` by dialing the following (on your phone not the app):
 
 - VZW -  `*727089827739`
 - AT&T or T-Mobile -  `**21*17089827739#`)
