@@ -1,7 +1,7 @@
 <script>
     <head/>
     <body>
-    <auth id='my_id' type='gcp' value='GCP key value here'/>
+    <auth id='my_id' type='gcp' value='GCPkeyvaluehere'/>
         <snippet id='doorman'>
             <ring/>
             <answer>
@@ -98,7 +98,7 @@
                                                 <onComplete>
                                                     <play src='https://s3.us-east-2.amazonaws.com/vp-waves/beep.wav'>
                                                         <onComplete>
-                                                            <<record alias='call_recording' max-duration='20000'>
+                                                            <record alias='call_recording' max-duration='20000'>
                                                                 <stream protocol="GOOGLE_TRANSCRIPTION" interimResults="false" webhook="https://webhook.site/a68530e9-5c21-44b6-bc8e-b8ad796a2609" language="en-US" useEnhanced="false" enableAutomaticPunctuation="true" speechModel="default" auth="my_id">
                                                                     <onCompleteResult _text='TRANSCRIBED_TEXT'>
                                                                         <query url='https://webhook.site/a68530e9-5c21-44b6-bc8e-b8ad796a2609' method='post'>
