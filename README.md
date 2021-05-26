@@ -23,6 +23,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [IVR](#ivr)
 - [Live transcription](#livetranscription)
 - [Key word spotter](#keyword)
+- [Bi-lingual conversational IVR](#conversationalivr)
 - [Busy](#busy)
 
 
@@ -213,6 +214,11 @@ This code will return webhook whenever specified word is uttered.
 8. Link to the recording is sent to specified webhook
 
 >Note: For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/stream)
+
+#### Bi-lingual Conversatinal IVR <a href='#conversationalivr' id='conversationalivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/conversationalivr.xml)
+
+This is an example of 3 layer bi-lingual (English/Spanish) converational IVR 
+
 
 #### Busy Tone <a href='#busy' id='busy' class='anchor' aria-hidden='true'></a> [see xml](/sample/busy.xml)
 

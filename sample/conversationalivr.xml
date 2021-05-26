@@ -1,0 +1,142 @@
+<script>
+    <head/>
+    <body>
+        <auth id='my_id' type='gcp' value='your gcp service key here'/>
+        <snippet id='main_menu'>
+            <timeout seconds='1'>
+                <onComplete>
+                    <say text="For assistance in english stay on the line" target="inbound_test" >
+                        <onComplete>
+                            <say text="para español oprima dos." target="inbound_test" lang='es-US' voice='Miguel'>
+                                <flush event='onDTMF' target='inbound_test'/>
+                                <ready_dtmfs/>
+                            </say>
+                        </onComplete>
+                    </say>
+                </onComplete>
+            </timeout>
+        </snippet>
+        <snippet id='english_menu'>
+            <say text="Please Tell us more about the reason for your call! ,you can use words like bill,service or other." target="inbound_test" lang='en-US' voice='Matthew'>
+                <record max-duration="90000" direction='send' id="key_word_recorder_english">
+                    <stream keywords="bill,service,issue,other,yes,no" protocol="GOOGLE_WORD_SPOTTER" languageCode='en-US'  webhook="https://webhook.site/9ee4d023-f9f7-4fd9-bb35-e39fd73d6d2e" auth="my_id">
+                        <english_menu_2/>
+                    </stream>
+                    <onComplete>
+                        <hangup target="inbound_test"/>
+                        <stop-stream target="key_word_spotter_english"/>
+                    </onComplete>
+                </record>
+            </say>
+        </snippet>
+        <snippet id='english_menu_2' limit='30'>
+            <onSpeak keyword="billing">
+                <say text="It sounds like you would like help with your bill. Is that correct?" target="inbound_test" lang='en-US' voice='Matthew'></say>
+                <english_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="bill">
+                <say text="It sounds like you would like help with your bill. Is that correct?" target="inbound_test" lang='en-US' voice='Matthew'></say>
+                <english_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="service">
+                <say text="It sounds like you would like help with your service. Is that correct?" target="inbound_test" lang='en-US' voice='Matthew'></say>
+                <english_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="issue">
+                <say text="It sounds like you would like help with an issue. Which issue can we help you with specifically?" target="inbound_test" lang='en-US' voice='Matthew'></say>
+                <english_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="other">
+                <say text="Let us connect you with an agent" target="inbound_test" lang='en-US' voice='Matthew'></say>
+                <onComplete>
+                    <play src='https://www.soundjay.com/phone/sounds/phone-calling-1.mp3' repeat='10' group='announcement'/>
+                </onComplete>
+            </onSpeak>
+            <onSpeak keyword="yes">
+                <say text="Let me connect you with an agent" target="inbound_test" lang='en-US' voice='Matthew'>
+                    <onComplete>
+                        <play src='https://www.soundjay.com/phone/sounds/phone-calling-1.mp3' repeat='10' group='announcement'/>
+                    </onComplete>
+                </say>
+            </onSpeak>
+            <onSpeak keyword="no">
+                <say text="What can we help you with, you can use words like bill,service or other." target="inbound_test" lang='en-US' voice='Matthew'></say>
+                <english_menu_2/>
+            </onSpeak>
+        </snippet>
+        <snippet id='spanish_menu'>
+            <say text="Por favor diga nos mas sobre el razon para su llamada, puede decir facturación,servicio o otra cosa" target="inbound_test" lang='es-US' voice='Miguel'>
+                <record max-duration="90000" direction='send' id="key_word_recorder_spanish">
+                    <stream keywords="facturación,servicio,otro,otra cosa,sí,no" protocol="GOOGLE_WORD_SPOTTER" languageCode='es-US' webhook="https://webhook.site/9ee4d023-f9f7-4fd9-bb35-e39fd73d6d2e" auth="my_id">
+                        <spanish_menu_2/>
+                    </stream>
+                    <onComplete>
+                        <hangup target="inbound_test"/>
+                        <stop-stream target="key_word_spotter_spanish"/>
+                    </onComplete>
+                </record>
+            </say>
+        </snippet>
+        <snippet id='spanish_menu_2' limit='30'>
+            <onSpeak keyword="facturación">
+                <say text="Parece que le gustaría recibir ayuda con su factura. Es eso correcto?" target="inbound_test" lang='es-US' voice='Miguel'></say>
+                <spanish_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="bill">
+                <say text="Por favor diga nos mas sobre el razon para su llamada" target="inbound_test" lang='es-US' voice='Miguel'></say>
+                <spanish_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="servicio">
+                <say text="Parece que esta llamando sobre su servicio. Es eso correcto?" target="inbound_test" lang='es-US' voice='Miguel'></say>
+                <spanish_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="otro">
+                <say text="Por favor diga nos mas sobre el razon para su llamada" target="inbound_test" lang='es-US' voice='Miguel'></say>
+                <spanish_menu_2/>
+            </onSpeak>
+            <onSpeak keyword="otra cosa">
+                <say text="lo conectaremos con un agente" target="inbound_test" lang='es-US' voice='Miguel'>
+                    <onComplete>
+                        <play src='https://www.soundjay.com/phone/sounds/phone-calling-1.mp3' repeat='10' group='announcement'/>
+                    </onComplete>
+                </say>
+            </onSpeak>
+            <onSpeak keyword="sí">
+                <say text="lo conectaremos con un agente" target="inbound_test" lang='es-US' voice='Miguel'>
+                    <onComplete>
+                        <play src='https://www.soundjay.com/phone/sounds/phone-calling-1.mp3' repeat='10' group='announcement'/>
+                    </onComplete>
+                </say>
+            </onSpeak>
+            <onSpeak keyword="no">
+                <say text="Por favor diga nos mas sobre el razon para su llamada, puede decir facturación,servicio o otra cosa" target="inbound_test" lang='es-US' voice='Miguel'></say>
+                <spanish_menu_2/>
+            </onSpeak>
+        </snippet>
+        <snippet id='ready_dtmfs'>
+            <timeout seconds='6' alias='global_behavior_timeout'>
+                <onDTMF digits='2'>
+                    <cancel-timeout target='global_behavior_timeout'/>
+                    <say text="Gracias" target="inbound_test" lang='es-US' voice='Miguel'>
+                        <onComplete>
+                            <spanish_menu/>
+                        </onComplete>
+                    </say>
+                </onDTMF>
+                <onComplete>
+                    <english_menu/>
+                </onComplete>
+            </timeout>
+        </snippet>
+        <accept/>
+        <ring/>
+        <answer  alias="inbound_test">
+            <onConnect>
+                <main_menu/>
+            </onConnect>
+        </answer>
+        <onDisconnect>
+            <hangup target="inbound_test"/>
+        </onDisconnect>
+    </body>
+</script>
