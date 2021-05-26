@@ -226,7 +226,7 @@ This is an example of 3 layer bi-lingual (English/Spanish) converational IVR. Th
 5. Key words are declared for the key word spotter together with the language of the branch.
 6. Correct language and voice for Text-to-Speech is declared.
 7. Depending on the key word utterances calls may be routed to an agent.
-8. Fake ringing tone is used to simulate a call to an agent. In real scenario this would be replaced with a <dial>
+8. Fake ringing tone is used to simulate a call to an agent. In real scenario this would be replaced with a `<dial>`verb
 
 
 #### Busy Tone <a href='#busy' id='busy' class='anchor' aria-hidden='true'></a> [see xml](/sample/busy.xml)
