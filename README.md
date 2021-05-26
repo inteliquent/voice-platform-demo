@@ -228,6 +228,7 @@ This is an example of 3 layer bi-lingual (English/Spanish) converational IVR. Th
 7. Depending on the key word utterances calls may be routed to an agent.
 8. Fake ringing tone is used to simulate a call to an agent. In real scenario this would be replaced with a `<dial>`verb
 
+>Note: This is an example of a serverless IVR, if decision making logic is required `<query>`can be declared in every `<onSpeak>` event to return the desired behavior.
 
 #### Busy Tone <a href='#busy' id='busy' class='anchor' aria-hidden='true'></a> [see xml](/sample/busy.xml)
 
