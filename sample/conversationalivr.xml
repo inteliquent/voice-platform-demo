@@ -47,10 +47,11 @@
                 <english_menu_2/>
             </onSpeak>
             <onSpeak keyword="other">
-                <say text="Let us connect you with an agent" target="inbound_test" lang='en-US' voice='Matthew'></say>
+                <say text="Let us connect you with an agent" target="inbound_test" lang='en-US' voice='Matthew'>
                 <onComplete>
                     <play src='https://www.soundjay.com/phone/sounds/phone-calling-1.mp3' repeat='10' group='announcement'/>
                 </onComplete>
+                </say>
             </onSpeak>
             <onSpeak keyword="yes">
                 <say text="Let me connect you with an agent" target="inbound_test" lang='en-US' voice='Matthew'>
