@@ -8,7 +8,7 @@
             <onConnect>
                 <say text="This is Keyword spotter application, it will send you webhook whenever you say either a Yes or a No">
                     <onComplete>
-                        <record  max-duration="10000" target="inbound">
+                        <record max-duration="10000" target="inbound">
                             <stream keywords="yes,no" protocol="GOOGLE_WORD_SPOTTER" webhook="web hook URL" auth="my_id">
                                 <onSpeak keyword="yes">
                                     <query url="webhook URL" method="post">
@@ -26,7 +26,7 @@
                             <onComplete _link="LINK" _duration="DD">
                                 <query url="webhook URL" method="post">
                                     <param name="recording" value="{{LINK}}"/>
-                                    <param name="duration" value="{{DD}}"/
+                                    <param name="duration" value="{{DD}}"/>
                                 </query>
                                 <hangup target="inbound"/>
                             </onComplete>
