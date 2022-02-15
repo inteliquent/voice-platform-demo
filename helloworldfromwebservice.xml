@@ -1,0 +1,14 @@
+<script>
+    <head/>
+    <body>
+      <answer>
+            <onConnect>
+                <say text="Hello World">
+                    <onComplete>
+                        <hangup/>
+                    </onComplete>
+                </say>
+            </onConnect>
+        </answer>
+    </body>
+</script>

@@ -10,6 +10,7 @@ This repository is intended to provide developers, who are looking to develop th
 ### Code Snippets
 - [Hello World](#helloworld)
 - [Hello World w/ callback](#callback)
+- [Initial script w/ callback](#initial)
 - [Forward call to SIP URI](#sipuri)
 - [Forward call to another number](#number)
 - [Forward call to registered SIP client](#regclientin)
@@ -47,7 +48,16 @@ This repository is intended to provide developers, who are looking to develop th
 3. Call is hung-up
 4. Call related information is sent to specified webhook
 
+#### Initial script with callback and "Hello World" respose <a href='#initial' id='initial' class='anchor' aria-hidden='true'></a> [see xml](/sample/initial.xml)
 
+>Note: This script is equivalent to default webhook configuration seen with e.g. Twilio but with some customization to showcase flexibility. The script expects to receive additional XML from the called webservice with insctructions of what to do next.
+
+1. Call is accepted (183 Session Progress returned)
+2. Caller hears ringing (200OK + ACK)
+3. Webhook is sent to a defined URL with useful parameters (<a href='#webhook' id='webhook' class='anchor' aria-hidden='true'></a> [JSON](/sample/webhook.json)) as well as information in the HTTP header that can be used for authentication for example. The webservice can  use this information to determine what the next steps should be. In our case the webservice responds with simple <a href='#responsefromwebservice' id='responsefromwebservice' class='anchor' aria-hidden='true'></a> [Hello World](/sample/helloworldfromwebservice.xml) XML script. 
+4. The script will wait up to 4 seconds for this response after which timeout is declared (error equivalent)
+5. In case of a timeout or error (e.g. 404) message will be played to a caller informing them of an issue. The script will wait 1 second before this message is played to account for possible network latency don't and to ensure the cut message is not cut off. 
+6. Originating call leg is hung up
 
 #### Forward call to SIP URI <a href='#sipuri' id='sipuri' class='anchor' aria-hidden='true'></a> [see xml](/sample/sipuri.xml)
 

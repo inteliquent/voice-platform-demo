@@ -1,0 +1,39 @@
+<script>
+    <head/>
+    <body>
+        <accept alias="inbound-call"/>
+        <ring/>
+        <query url="https://yourwebhookurlrighthere.com" method="post" timeout="4">
+            <header name="Authorization" value="somethingsecret"/>
+            <param name="From:" value="{{INBOUND_CALLER_NUMBER}}"/>
+            <param name="To:" value="{{INBOUND_CALLEE_NUMBER}}"/>
+            <param name="Originally From:" value="{{@P-Asserted-Identity}}"/>
+            <param name="P-Asserted-Identity" value="{{P-Asserted-Identity}}"/>
+            <param name="verstat" value="{{INBOUND_VERSTAT}}"/>
+            <param name="callerId" value="{{INBOUND_CALLER_ID}}"/>
+            <param name="calleeId" value="{{INBOUND_CALLEE_ID}}"/>
+            <param name="callId" value="{{CALL_ID}}"/>
+            <param name="direction" value="{{DIRECTION}}"/>
+            <param name="diversion" value="{{@Diversion}}"/>
+            <param name="diversionTop" value="{{@Diversion-Top}}"/>
+            <param name="domain" value="{{X-Domain}}"/>
+            <param name="requestUriUser" value="{{INBOUND_REQ_URI_USER}}"/>
+            <param name="scriptId" value="{{SCRIPT_ID}}"/>
+            <onError>
+                <answer target="inbound-call">
+                    <onConnect>
+                        <timeout seconds="1">
+                            <onComplete>
+                                <say target="inbound-call" text="Sorry, this number cannot be reached at the moment. Please try again later. Good bye.">
+                                    <onComplete>
+                                        <hangup target="inbound-call"/>
+                                    </onComplete>
+                                </say>
+                            </onComplete>
+                        </timeout>
+                    </onConnect>
+                </answer>
+            </onError>
+        </query>
+    </body>
+</script>
