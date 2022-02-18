@@ -22,6 +22,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [Voicemail](#voicemail)
 - [Outbound A2P call](#a2p)
 - [IVR](#ivr)
+- [Authenticated conference](#conferenceroom)
 - [Live transcription](#livetranscription)
 - [Key word spotter](#keyword)
 - [Bi-lingual conversational IVR](#conversationalivr)
@@ -193,6 +194,19 @@ This code plays back the number pressed on your keypad.
 9. Depending on the digit pressed the user hears `Your pressed digit`.
 10. User is returned to the main menu and can press any of the digits again.
 11. Limit of 99 loops is put on the IVR.
+
+#### Authenticated Conference <a href='#conferenceroom' id='conferenceroom' class='anchor' aria-hidden='true'></a> [see xml](/sample/conferenceroom.xml)
+
+This code provides example of authenticated audio conference
+
+1. This script should be attached to a conference access number
+2. Caller will hear prompt to enter conference id
+3. When customer enters 6 digits a webhook will be sent to customer portal.
+4. If the conference exists, the webservice will return PIN code to the platform
+5. Caller will hear prompt to enter PIN code.
+6. If the PIN code is entered correctly the caller is placed into the conference. 
+7. Once the caller is joined into the conference she hears message `You are now part of the conference room number 654321`
+8. Customer will have 3 opportunities to enter conf. room and PIN correctly. After 3 failed attempts the call ends
 
 #### Live transcription <a href='#livetranscription' id='livetranscription' class='anchor' aria-hidden='true'></a> [see xml](/sample/livetranscription.xml)
 

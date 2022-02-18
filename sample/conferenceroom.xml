@@ -1,0 +1,155 @@
+<script>
+    <head/>
+    <body>
+        <snippet id="dial_conference">
+            <dial caller='{{INBOUND_CALLER_NUMBER}}' conference='{{ROOM}}'>
+                <onConnect>
+                    <join/>
+                    <onJoin>
+                        
+                        <say target="{{X-OrigCallId}}">
+                        <![CDATA[
+                        
+                    <speak>You are now in the conference room number  
+                                
+                            <say-as interpret-as="digits">{{ROOM}}</say-as></speak>]]>
+                
+                
+                    </say>
+                
+                </onJoin>
+            </onConnect>
+            <onDisconnect>
+                <hangup/>
+            </onDisconnect>
+        </dial>
+    </snippet>
+    <snippet id='no_room'>
+        <say TEXT='Invalid meeting ID.'>
+            <onComplete>
+                <initial_prompt ROOM=''>
+                    <onError>
+                        <goodbye/>
+                    </onError>
+                </initial_prompt>
+            </onComplete>
+        </say>
+    </snippet>
+    <snippet id='no_pin'>
+        <say TEXT='Invalid PIN.'>
+            <onComplete>
+                <second_prompt PIN=''>
+                    <onError>
+                        <goodbye/>
+                    </onError>
+                </second_prompt>
+            </onComplete>
+        </say>
+    </snippet>
+    <snippet id="pin_auth">
+        <match a="{{PIN}}" b="{{TEMPLATE_PIN}}" type="equals">
+            <onTrue>
+                <dial_conference/>
+            </onTrue>
+            <onFalse>
+                <no_pin/>
+            </onFalse>
+        </match>
+    </snippet>
+    <snippet id="submit_room">
+        <query url="yourwebserviceurl.com" method="post">
+            <param name="by" value="digits"/>
+            <param name="SearchValue" value="{{ROOM}}"/>
+            <onError>
+                <say TEXT="An error occured">
+                    <onComplete>
+                        <goodbye/>
+                    </onComplete>
+                </say>
+            </onError>
+        </query>
+        <!-- Here, we expect a server response containing either:
+			<no_room/> or for example: 
+			<second_prompt TEMPLATE_PIN='123456'/> in case the requested conference room was found -->
+	
+    
+    </snippet>
+    <snippet id='initial_prompt' limit='3'>
+        <snippet id="get_room" limit="6">
+            <input_timer/>
+            <onDTMF ref="ROOM">
+                <cancel-timeout target='input_timer'/>
+                <get_room>
+                    <onError>
+                        <submit_room/>
+                    </onError>
+                </get_room>
+            </onDTMF>
+        </snippet>
+        <snippet id='input_timer'>
+            <timeout seconds='10' alias='input_timer'>
+                <onComplete>
+                    <no_room/>
+                </onComplete>
+            </timeout>
+        </snippet>
+        <say TEXT="Please enter your meeting ID."/>
+        <flush event='onDTMF'/>
+        <get_room/>
+
+        <!-- the initial_prompt snippet group handles the detection of the room number via DTMF, it recursively calls itself adding input digits until the limit 6 is reached. The top level snippet can be called up to 3 times in case customer makes an error -->
+    </snippet>
+    <snippet id='second_prompt' limit='3'>
+        <snippet id="get_pin" limit="6">
+            <input_timer/>
+            <onDTMF ref="PIN">
+                <cancel-timeout target='input_timer'/>
+                <get_pin>
+                    <onError>
+                        <pin_auth/>
+                    </onError>
+                </get_pin>
+            </onDTMF>
+        </snippet>
+        <snippet id='input_timer'>
+            <timeout seconds='10' alias='input_timer'>
+                <onComplete>
+                    <no_pin/>
+                </onComplete>
+            </timeout>
+        </snippet>
+        <say TEXT="Please enter the access PIN."/>
+        <flush event='onDTMF'/>
+        <get_pin/>
+    </snippet>
+
+    <!-- the second_prompt behaves very similarly to the initial prompt an giving customer 3 changes to enter 6 digits PIN code. Once 6 digits are entered it will compare it to TEMPLATE_PIN received when the room was entered correctly -->
+    <snippet id='goodbye'>
+        <say TEXT='Goodbye!'>
+            <onComplete>
+                <hangup/>
+            </onComplete>
+        </say>
+    </snippet>
+    <snippet id="global-hangup">
+        <query method="post" url="yourwebserviceurl.com">
+            <optional name="type" value="hangup"></optional>
+            <optional name="callId" value="{{X-OrigCallId}}"></optional>
+        </query>
+    </snippet>
+    <accept/>
+    <ring/>
+    <answer alias="{{X-OrigCallId}}">
+        <onConnect>
+            <say TEXT='HELLO!'>
+                <onComplete>
+                    <initial_prompt/>
+                </onComplete>
+            </say>
+        </onConnect>
+        <onDisconnect>
+            <run-snippet id="global-hangup"></run-snippet>
+        </onDisconnect>
+    </answer>
+</body>
+</script>
