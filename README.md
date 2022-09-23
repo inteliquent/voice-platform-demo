@@ -14,6 +14,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [Forward call to SIP URI](#sipuri)
 - [Forward call to another number](#number)
 - [Forward call to registered SIP client](#regclientin)
+- [Number masking with external proxy](#masking)
 - [Transfer caller between two agents](#calltransfer)
 - [Dial from registered client](#regclientout)
 - [Snippet](#snippet)
@@ -93,6 +94,15 @@ This repository is intended to provide developers, who are looking to develop th
 
 
 >Note 2: Client specific domains include the `vp.sip.global` suffix. Customer specific registration domain will be established during customer onboarding.
+
+### Number masking with external proxy <a href='#masking' id='masking' class='anchor' aria-hidden='true'></a> [see xml](/sample/masking.xml)
+
+1. Call is Accepted
+2. Webhook is sent to masking proxy containing useful network parameters.  JSON response is expected with values of the proxy_from and proxy_to numbers
+3. JSON parameters are saved in order to be used later in the call
+4. New call leg is dialed with the new to/from values
+5. When called party answers the two call legs are joined
+6. When either party hangs up both call legs are hung up
 
 #### Transfer caller between two agents <a href='#calltransfer' id='calltransfer' class='anchor' aria-hidden='true'></a> [see xml](/sample/calltransfer.xml)
 
