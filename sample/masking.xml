@@ -1,0 +1,63 @@
+<script>
+    <head/>
+    <body>
+        <snippet id='hangup_all'>
+            <hangup target='to_proxy'/>
+            <hangup target='from_proxy'/>
+        </snippet>
+        <snippet id='proxy'>
+            <post url='proxy url'>
+                <!-- send HTTP POST with user defined information either as parameters or headers -->
+                <![CDATA[
+                                    { "Script_Id": "{{SCRIPT_ID}}","Call_Id": "{{CALL_ID}}","From": "{{INBOUND_CALLER_NUMBER}}", "To": "{{INBOUND_CALLEE_NUMBER}}", "Forwarding_Number": "{{@Diversion-Top}}" }
+                                ]]>
+                <onComplete code='200'>
+                    <!-- if the POST is successful save the received JSON parameters as run-time variables, in this case proxy_from and proxy_to JSON  values are saved so that they can be used in the call from now on -->
+                    <save key='PROXY_FROM' value='{{proxy_from}}' />
+                    <save key='PROXY_TO' value='{{proxy_to}}' />
+                    <call_dasher/>
+                </onComplete>
+                <onError>
+                    <hangup_all/>
+                    <!-- if the HTTP POST fails hang up the call -->
+                
+                
+                </onError>
+            </post>
+        </snippet>
+        <snippet id='from_proxy'>
+            <dial caller='{{PROXY_FROM}}' number='{{PROXY_TO}}' alias="from_proxy">
+                <!-- initiate call to the customer from masked proxy number -->
+                <onRing>
+                    <ring target='to_proxy'/>
+                </onRing>
+                <onConnect>
+                    <!-- once caller answers his/her phone also answer callee's call and join both together -->
+                    <answer target='to_proxy'>
+                        <onConnect>
+                            <join target='from_proxy'>
+                                <onLeave>
+                                    <!-- if either party hangs up hang up the other (both) legs -->
+                                    <hangup_all/>
+                                </onLeave>
+                            </join>
+                        </onConnect>
+                        <onDisconnect>
+                            <hangup_all/>
+                        </onDisconnect>
+                    </answer>
+                </onConnect>
+            </dial>
+            <onDisconnect>
+                <hangup_all/>
+            </onDisconnect>
+        </snippet>
+        <accept alias="proxy"/>
+        <!-- responds to incoming call with 100 Trying -->
+        <proxy/>
+        <!-- calls snippet "proxy" that will send a webhook to the proxy web service -->
+        <onDisconnect>
+            <hangup_all/>
+        </onDisconnect>
+    </body>
+</script>
