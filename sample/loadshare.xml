@@ -1,0 +1,26 @@
+<script>
+    <head/>
+    <body>
+        <accept alias='inbound_call'/>
+        <ring/>
+        <save key='LIST' value='+17201111111;+18001111111;+18881111111;+13031111111'/>
+        <save key='RANDOM_NUMBER' value='{{$random_in(LIST)}}'/>
+        <dial caller='{{INBOUND_CALLER_NUMBER}}' number='{{RANDOM_NUMBER}}' alias='outbound_call'>
+            <onConnect>
+                <answer target='inbound_call'>
+                    <onConnect>
+                        <join target="outbound_call"/>
+                    </onConnect>
+                </answer>
+            </onConnect>
+            <onDisconnect>
+                <hangup target="inbound_call"/>
+                <hangup target="outbound_call"/>
+            </onDisconnect>
+        </dial>
+        <onDisconnect>
+            <hangup target="inbound_call"/>
+            <hangup target="outbound_call"/>
+        </onDisconnect>
+    </body>
+</script>

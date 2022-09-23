@@ -13,6 +13,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [Initial script w/ callback](#initial)
 - [Forward call to SIP URI](#sipuri)
 - [Forward call to another number](#number)
+- [Forward call to four numbers and loadshare among them](#loadshare)
 - [Forward call to registered SIP client](#regclientin)
 - [Number masking with external proxy](#masking)
 - [Transfer caller between two agents](#calltransfer)
@@ -77,6 +78,17 @@ This repository is intended to provide developers, who are looking to develop th
 2. Ringing tone is played to calling leg
 3. New call leg is initiated to a dialable number
 4. `INBOUND_CALLER_NUMBER` variable is used as Caller Id
+5. When called party answers the two call legs are joined
+6. When either party hangs up both call legs are hung up
+
+
+#### Forward call to four numbers and loadshare among them <a href='#loadshare' id='loadshare' class='anchor' aria-hidden='true'></a> [see xml](/sample/loadshare.xml)
+
+1. Call is Accepted
+2. Ringing tone is played to calling leg
+3. Array of four numbers is loaded as a variable (this array could be requsted dynamically with a webhook as well)
+4. One number is selected at random and stored as variable called `RANDOM`
+5. New call leg is initiated to the randomly selected number
 5. When called party answers the two call legs are joined
 6. When either party hangs up both call legs are hung up
 
