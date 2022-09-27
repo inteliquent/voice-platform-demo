@@ -52,7 +52,7 @@
                 <hangup_all/>
             </onDisconnect>
         </snippet>
-        <accept alias="proxy"/>
+        <accept alias="to_proxy"/>
         <!-- responds to incoming call with 100 Trying -->
         <proxy/>
         <!-- calls snippet "proxy" that will send a webhook to the proxy web service -->
