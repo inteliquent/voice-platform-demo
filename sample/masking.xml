@@ -15,7 +15,7 @@
                     <!-- if the POST is successful save the received JSON parameters as run-time variables, in this case proxy_from and proxy_to JSON  values are saved so that they can be used in the call from now on -->
                     <save key='PROXY_FROM' value='{{proxy_from}}' />
                     <save key='PROXY_TO' value='{{proxy_to}}' />
-                    <call_dasher/>
+                    <from_proxy/>
                 </onComplete>
                 <onError>
                     <hangup_all/>
