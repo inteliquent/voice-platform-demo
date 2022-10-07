@@ -1,9 +1,41 @@
-curl --location --request POST 'yourwebservice.com' \
---header 'connection: close' \
---header 'content-length: 1513' \
---header 'authorization: somethingsecret' \
---header 'user-agent: vp2-inteliquent' \
---header 'content-type: application/json' \
---header 'accept: */*' \
---header 'host: yourwebservice.com' \
---data-raw '{"scriptid":"504c83b4-fa7c-4e48-b16f-f841c840718d","callid":"49281d43-b47d-4c4b-99bc-68bf4cef7c88@-1225586938","status":"UNMAPPED","callbackUrl":"https://external-api.inteliquent.net/callback/L1kD6HPpvnWDk6XVPtGVS70509x61aaNSqIOsUQnOVs_/504c83b4-fa7c-4e48-b16f-f841c840718d/49281d43-b47d-xxxx-99bc-68bf4cef7c88@-1225586938","callDetails":{"arrivalTime":"1644951969773","callee":"+12029780121@137.192.78.42:5060","caller":"+17201234567@206.146.99.10:5060","callid":"49281d43-b47d-4c4b-99bc-68bf4cef7c88@dal-vp2fs03.ipa.prd.localnet.io","customer":"124396","duration":"0","params":"","scriptid":"504c83b4-fa7c-4e48-b16f-f841c840718d"},"params":{"From:":"+17201234567","To:":"+12029780121","Originally From:":"+17201234567","P-Asserted-Identity":"<sip:+17201234567@206.146.99.10:5060>","verstat":"TN-Validation-Passed","callerId":"+17201234567@206.146.99.10:5060","calleeId":"+12029780121@137.192.78.42:5060","callId":"49281d43-b47d-4c4b-99bc-68bf4cef7c88@dal-vp2fs03.ipa.prd.localnet.io","direction":"inbound","diversion":"","diversionTop":"","domain":"customer-trial.vp.sip.global","requestUriUser":"+12029780121","scriptId":"504c83b4-fa7c-4e48-b16f-f841c840718d"},"eventDetails":{"from":"<sip:+17201234567@206.146.99.10:5060>;tag=gK025171a1","to":"<sip:+12029780121@137.192.78.42:5060>","via":"SIP/2.0/UDP 10.24.134.33:5060;branch=z9hG4bK44goni10eg0koi7ph8f0.1","P-Asserted-Identity":"<sip:+17201234567@206.146.99.10:5060>","version":"0.16.0","X-Domain":"customer-trial.vp.sip.global","X-OrigCallId":"170033762_109030125@206.146.99.10"}}'
+{
+    "scriptid": "504c83b4-fa7c-4e48-b16f-f841c840718d",
+    "callid": "49281d43-b47d-4c4b-99bc-68bf4cef7c88@-1225586938",
+    "status": "UNMAPPED",
+    "callbackUrl": "https://external-api.inteliquent.net/callback/L1kD6HPpvnWDk6XVPtGVS70509x61aaNSqIOsUQnOVs_/504c83b4-fa7c-4e48-b16f-f841c840718d/49281d43-b47d-xxxx-99bc-68bf4cef7c88@-1225586938",
+    "callDetails": {
+        "arrivalTime": "1644951969773",
+        "callee": "+12029780121@137.192.78.42:5060",
+        "caller": "+17201234567@206.146.99.10:5060",
+        "callid": "49281d43-b47d-4c4b-99bc-68bf4cef7c88@dal-vp2fs03.ipa.prd.localnet.io",
+        "customer": "124396",
+        "duration": "0",
+        "params": "",
+        "scriptid": "504c83b4-fa7c-4e48-b16f-f841c840718d"
+    },
+    "params": {
+        "From:": "+17201234567",
+        "To:": "+12029780121",
+        "Originally From:": "+17201234567",
+        "P-Asserted-Identity": "<sip:+17201234567@206.146.99.10:5060>",
+        "verstat": "TN-Validation-Passed",
+        "callerId": "+17201234567@206.146.99.10:5060",
+        "calleeId": "+12029780121@137.192.78.42:5060",
+        "callId": "49281d43-b47d-4c4b-99bc-68bf4cef7c88@dal-vp2fs03.ipa.prd.localnet.io",
+        "direction": "inbound",
+        "diversion": "",
+        "diversionTop": "",
+        "domain": "customer-trial.vp.sip.global",
+        "requestUriUser": "+12029780121",
+        "scriptId": "504c83b4-fa7c-4e48-b16f-f841c840718d"
+    },
+    "eventDetails": {
+        "from": "<sip:+17201234567@206.146.99.10:5060>;tag=gK025171a1",
+        "to": "<sip:+12029780121@137.192.78.42:5060>",
+        "via": "SIP/2.0/UDP 10.24.134.33:5060;branch=z9hG4bK44goni10eg0koi7ph8f0.1",
+        "P-Asserted-Identity": "<sip:+17201234567@206.146.99.10:5060>",
+        "version": "0.16.0",
+        "X-Domain": "customer-trial.vp.sip.global",
+        "X-OrigCallId": "170033762_109030125@206.146.99.10"
+    }
+}'
