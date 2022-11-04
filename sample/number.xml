@@ -3,7 +3,7 @@
     <body>
         <accept alias="from_pstn"/>
         <ring/>
-        <dial caller='{{INBOUND_CALLER_ID}}' number='+172012345678' alias="to_pstn_number">
+        <dial caller='{{INBOUND_CALLER_NUMBER}}' number='+172012345678' alias="to_pstn_number">
             <onConnect>
                 <answer target='from_pstn'>
                     <onConnect>
