@@ -36,7 +36,7 @@ This demo requires a registered SIP client. We recommend that you use SIP client
 
 ### Configuring the client for registration 
 
-Open the app and go to Keypad -> Click the settings icon or three dots for Android in the upper right hand corner -> Accounts -> +  -> Generic SIP Account:
+Open the app and go to Keypad -> Click the settings icon or three dots for Android in the upper right-hand corner -> Accounts -> +  -> Generic SIP Account:
 
 1. Name your account
 2. `Username`: Your personal cellphone number in the following format  `+17201234567` - The `+` before the 1 is required
@@ -46,13 +46,13 @@ Open the app and go to Keypad -> Click the settings icon or three dots for Andro
 6. If the registration was successful the registration status will be solid green.
 
 
-### Configuring the client for push notifications
+### (Optional) Configuring the client for push notifications
 
 1. In the **Groundwire** app go to `Settings` -> `Incoming Call` -> select `Push Notifications`
-2. Then go to `Settings` -> `Accoutns` -> select `Account that you created in the client configuration step above` 
+2. Then go to `Settings` -> `Accounts` -> select `Account that you created in the client configuration step above` 
 3. select `Advanced Settings`
 4. select `Push Options`
-5. go to `Private SIPIS` section and configure following values:
+5. go to `Private SIPIS` section and configure the following values:
     
    * **SIPIS host** - `sipis.sip.global`
    * **SIPIS registrar**  -`all.sipis.sip.global`
@@ -71,17 +71,17 @@ Now that you have a registered client we can proceed to the actual demo:
 - VZW -  `*727089827739`
 - AT&T or T-Mobile -  `**21*17089827739#`)
 2. Call your mobile number (one that has forwarding active) - call is forwarded to `708-982-7739` which is an Inteliquent number with Voice Platform capabilities enabled.
-3. The call arrives to Inteliquent Voice Platform and the following script is triggered: ([Inteliquent Doorman demo](sample/doorman_demo.xml)) 
+3. The call arrives at the Inteliquent Voice Platform and the following script is triggered: ([Inteliquent Doorman demo](sample/doorman_demo.xml)) 
 4. Voice Platform checks that this is a forwarded call.
-5. “Doorman functionality” is triggered and plays prompt saying “Hi! You have reached Inteliquent's Doorman demo. Please say your first and last names and the purpose of your call after the beep. Then I'll try to connect you.” 
+5. “Doorman functionality” is triggered and plays a prompt saying “Hi! You have reached Inteliquent's Doorman demo. Please say your first and last names and the purpose of your call after the beep. Then I'll try to connect you.” 
 6. Record the message (8 seconds) after recording stops caller hears “Thanks”
 7. Caller hears ringing
 8. Call is made to the registered Groundwire client and the client rings
-9. When you answer the incoming call  the following message is played “ Call from” + recording is played + Press 1 to answer; press 2 to answer with recording enabled; press 3 to send the call to voicemail; press 4 to reject or simply hangup.
+9. When you answer the incoming call  the following message is played “ Call from” + recording is played + Press 1 to answer; press 2 to answer with recording enabled; press 3 to send the call to voicemail; press 4 to reject or simply hang up.
 
 - If `1` is pressed the call is connected
 - If `2` is pressed the call is connected and both parties hear "This call is being recorded" and the callee also hears "to stop the recording press 5 at any time" when either party hangs up or the callee presses #5 the audio file with the recording is posted to this site https://webhook.site/#!/84f01ee0-1cc6-43f3-afa9-f10639c041f4 
-- If `3` is pressed the caller is sent to voicemail and link to file is posted to this site https://webhook.site/#!/84f01ee0-1cc6-43f3-afa9-f10639c041f4, Voicemail is also transcribed and the transcription is sent to the forwarding number (one that owns the app)
+- If `3` is pressed the caller is sent to voicemail and a link to the file is posted to this site https://webhook.site/#!/84f01ee0-1cc6-43f3-afa9-f10639c041f4, Voicemail is also transcribed and the transcription is sent to the forwarding number (one that owns the app)
 - If `4` is pressed call is ended
 
 When the call finishes call related information including the following is posted to this site https://webhook.site/#!/84f01ee0-1cc6-43f3-afa9-f10639c041f4
@@ -95,13 +95,13 @@ When the call finishes call related information including the following is poste
 - MOS score
 - Audio quality
 
-**NOTE:** To disable call forwarding dial the following:
+**NOTE:** To disable call forwarding, dial the following:
 - VZW - `*73`
 - AT&T or T-Mobile - `##002#`
 
 ### Dashboard
 
-All Inteliquent Voice Platform customers have access to a custom dashboard that shows real time information regarding their traffic. Example of such dashboard (will show information regarding calls generated in this demo) can be found here: https://p.datadoghq.com/sb/6e25311b3-fdf5071eeeb018205c8c828e9c5b8ce9
+All Inteliquent Voice Platform customers have access to a custom dashboard that shows real-time information regarding their traffic. An example of such a dashboard (which will show information regarding calls generated in this demo) can be found here: https://p.datadoghq.com/sb/6e25311b3-fdf5071eeeb018205c8c828e9c5b8ce9
 
 
 
