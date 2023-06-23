@@ -51,7 +51,7 @@
             <say text="Thanks.">
                 <onComplete>
                     <play src='https://www.soundjay.com/phone/sounds/phone-calling-1.mp3' repeat='10' group='announcement'/>
-                    <dial caller='{{INBOUND_CALLER_ID}}' number='{{DESTINATION}}' alias='forwarded_call'>
+                    <dial caller='{{INBOUND_CALLER_NUMBER}}' number='{{DESTINATION}}' alias='forwarded_call'>
                         <header name='X-Global' value='true'/>
                         <onConnect>
                             <say text="Call from...">
