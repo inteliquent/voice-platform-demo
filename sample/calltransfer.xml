@@ -54,7 +54,7 @@
         <snippet id='dial_sip'>
             <say text="We are dialing the SIP agent, if at any point you would like to be transferred to the WebRTC operator you can press 2" target="PSTN_leg" alias="prompt">
                 <onComplete>
-                    <dial caller='{{INBOUND_CALLER_ID}}' number='sip:registeredsipuser@yourdomain.vp.sip.global' alias='sip_leg'>
+                    <dial caller='{{INBOUND_CALLER_NUMBER}}' number='sip:registeredsipuser@yourdomain.vp.sip.global' alias='sip_leg'>
                         <dial_mechanics/>
                     </dial>
                 </onComplete>
@@ -63,7 +63,7 @@
         <snippet id='dial_webrtc'>
             <say text="We are dialing Web R T C operator, if at any point you would like to be transferred to the SIP agent you can press 1" target="PSTN_leg" alias="prompt">
                 <onComplete>
-                    <dial caller='{{INBOUND_CALLER_ID}}' number='sip:registeredwebrtcclient@inteliquentdomain.com' alias="webrtc_leg">
+                    <dial caller='{{INBOUND_CALLER_NUMBER}}' number='sip:registeredwebrtcclient@inteliquentdomain.com' alias="webrtc_leg">
                         <dial_mechanics/>
                     </dial>
                 </onComplete>
