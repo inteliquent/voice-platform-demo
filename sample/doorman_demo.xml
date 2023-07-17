@@ -74,7 +74,7 @@
                                                 <onComplete>
                                                     <record alias='call_recording'>
                                                         <onComplete _link='LINK'>
-                                                            <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
+                                                            <query url='https://webhook.site/1d062114-1d24-48b9-861a-76c04fd46cb8' method='post'>
                                                                 <param name='recording' value='{{LINK}}'/>
                                                                 <param name='description' value="Call recording"/>
                                                             </query>
@@ -108,7 +108,7 @@
                                                                     </onCompleteResult>
                                                                 </stream>
                                                                 <onComplete _link='LINK'>
-                                                                    <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
+                                                                    <query url='https://webhook.site/1d062114-1d24-48b9-861a-76c04fd46cb8' method='post'>
                                                                         <param name='disclaimer' value='This information is not private'/>
                                                                         <param name='recording' value='{{LINK}}'/>
                                                                         <param name='description' value="IQNT Demo voicemail"/>
@@ -136,7 +136,7 @@
                         </onConnect>
                         <onDisconnect>
                             <hangup target='incoming_call'/>
-                            <query url='https://webhook.site/84f01ee0-1cc6-43f3-afa9-f10639c041f4' method='post'>
+                            <query url='https://webhook.site/1d062114-1d24-48b9-861a-76c04fd46cb8' method='post'>
                                 <param name='disclaimer' value='This information is not private'/>
                                 <param name='diversion' value='{{@Diversion}}'/>
                                 <param name='requestUriUser' value='{{INBOUND_REQ_URI_USER}}'/>
