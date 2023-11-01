@@ -28,6 +28,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [Live transcription](#livetranscription)
 - [Key word spotter](#keyword)
 - [Bi-lingual conversational IVR](#conversationalivr)
+- [AMD with beep detection](#amdbeepdetection)
 - [Busy](#busy)
 
 
@@ -275,6 +276,19 @@ This is an example of 3 layer bi-lingual (English/Spanish) conversational IVR. T
 8. Fake ringing tone is used to simulate a call to an agent. In real scenario this would be replaced with a `<dial>`verb
 
 >Note: This is an example of a serverless IVR, if decision making logic is required `<query>`can be declared in every `<onSpeak>` event to return the desired behavior.
+
+#### AMD with beep detection <a href='#amdbeepdetection' id='#amdbeepdetection' class='anchor' aria-hidden='true'></a> [see xml](/sample/amd_beep_detection.xml)
+
+This is an example of 3 layer bi-lingual (English/Spanish) conversational IVR. This is a more advanced application of the key word spotter.
+
+1. GCP authentication and account information is declared
+2. Call is answered
+3. Main Menu prompts are played in English and Spanish.
+4. If customer presses #2 the Spanish language branch is selected, if customer does nothing the English branch is used.
+5. Key words are declared for the key word spotter together with the language of the branch.
+6. Correct language and voice for Text-to-Speech is declared.
+7. Depending on the key word utterances calls may be routed to an agent.
+8. Fake ringing tone is used to simulate a call to an agent. In real scenario this would be replaced with a `<dial>`verb
 
 #### Busy Tone <a href='#busy' id='busy' class='anchor' aria-hidden='true'></a> [see xml](/sample/busy.xml)
 

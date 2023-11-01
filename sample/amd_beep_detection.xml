@@ -1,0 +1,39 @@
+<script>
+    <head/>
+    <body>
+        <snippet id='detect_machine'>
+        <!-- declare snippet that will handle machine detection -->
+            <amd machine-max-silence-period='1500' machine-min-nonstop-audio='3000' continuous-tone-detection='true'>
+                <onAnsweredBy answered_by_type="machine">
+                    <stop-play target='message_for_a_human'/>
+                    <!-- if voicemail greeting is detected stop playing message intended for the human -->
+                </onAnsweredBy>
+                <onMachineTone>
+                    <play src="publiclyaccessibleaudiofile.wav" target='pstn_call' alias='message_for_voicemail'>
+                    <!-- when voicemail beep is detected play message for the voicemail -->
+                        <onComplete>
+                        <!-- hangup the call once the message is completed -->
+                            <hangup/>
+                        </onComplete>
+                    </play>
+                </onMachineTone>
+            </amd>
+        </snippet>
+        <dial caller='+17200000001' number='+17200000002' alias='pstn_call'>
+            <onConnect>
+                <timeout seconds='1'>
+            <!-- add 1 second delay to give the human chance to start listening to the message -->
+                    <onComplete>
+                        <play src="publiclyaccessibleaudiofile.wav" target='pstn_call' alias='message_for_a_human'/>
+                        <!-- assume that message is answered by a human and play audio for that purpose -->
+                        <detect_machine/>
+                        <!-- at the same time start listening for a greeting -->
+                    </onComplete>
+                </timeout>
+            </onConnect>
+            <onDisconnect>
+                <hangup target="pstn_call"/>
+            </onDisconnect>
+        </dial>
+    </body>
+</script>
