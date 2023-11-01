@@ -200,7 +200,7 @@ This repository is intended to provide developers, who are looking to develop th
 2. When +17200000002 answers text converted to speech is played.
 3. Call is hung-up
 
->Note: A2P calls are cURL calls to https://external-api.inteliquent.net/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
+>Note: A2P calls are cURL calls to https://external-api.inteliquent.net/v2/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
 
 #### IVR <a href='#ivr' id='ivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/ivr.xml)
 
@@ -279,16 +279,17 @@ This is an example of 3 layer bi-lingual (English/Spanish) conversational IVR. T
 
 #### AMD with beep detection <a href='#amdbeepdetection' id='#amdbeepdetection' class='anchor' aria-hidden='true'></a> [see xml](/sample/amd_beep_detection.xml)
 
-This is an example of 3 layer bi-lingual (English/Spanish) conversational IVR. This is a more advanced application of the key word spotter.
+This is an example of an API call that will deliver voice message to a customer or customer's voicemail and is very useful for all voice notification use cases
 
-1. GCP authentication and account information is declared
-2. Call is answered
-3. Main Menu prompts are played in English and Spanish.
-4. If customer presses #2 the Spanish language branch is selected, if customer does nothing the English branch is used.
-5. Key words are declared for the key word spotter together with the language of the branch.
-6. Correct language and voice for Text-to-Speech is declared.
-7. Depending on the key word utterances calls may be routed to an agent.
-8. Fake ringing tone is used to simulate a call to an agent. In real scenario this would be replaced with a `<dial>`verb
+1. Call to a number is dialed
+2. When call is answered 1 second pause is added to allow the human to start listening to the message
+3. It is assumed that human will answer and an audio file intended for the human is played
+4. Answering machine detection (AMD) is started at the same time.
+5. If voicemail greeting is detected by AMD the message for the human is stopped
+6. When the voicemail beep is detected message inteded to be left in the voicemail is started
+7. When the message is completed call is hung up.
+
+>Note: A2P calls are cURL calls to https://external-api.inteliquent.net/v2/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
 
 #### Busy Tone <a href='#busy' id='busy' class='anchor' aria-hidden='true'></a> [see xml](/sample/busy.xml)
 
