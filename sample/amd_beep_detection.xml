@@ -4,7 +4,7 @@
         <snippet id='detect_machine'>
         <!-- declare snippet that will handle machine detection -->
             <amd machine-max-silence-period='1500' machine-min-nonstop-audio='3000' continuous-tone-detection='true'>
-                <onAnsweredBy answered_by_type="machine">
+                <onAnsweredBy type="machine">
                     <stop-play target='message_for_a_human'/>
                     <!-- if voicemail greeting is detected stop playing message intended for the human -->
                 </onAnsweredBy>
