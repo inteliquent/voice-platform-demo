@@ -277,16 +277,16 @@ This is an example of 3 layer bi-lingual (English/Spanish) conversational IVR. T
 
 >Note: This is an example of a serverless IVR, if decision making logic is required `<query>`can be declared in every `<onSpeak>` event to return the desired behavior.
 
-#### AMD with beep detection <a href='#amdbeepdetection' id='#amdbeepdetection' class='anchor' aria-hidden='true'></a> [see xml](/sample/amd_beep_detection.xml)
+#### AMD with beep detection <a href='#amdbeepdetection' id='amdbeepdetection' class='anchor' aria-hidden='true'></a> [see xml](/sample/amd_beep_detection.xml)
 
 This is an example of an API call that will deliver voice message to a customer or customer's voicemail and is very useful for all voice notification use cases
 
 1. Call to a number is dialed
-2. When call is answered 1 second pause is added to allow the human to start listening to the message
+2. When call is answered, 1 second pause is added to allow the human to start listening to the message
 3. It is assumed that human will answer and an audio file intended for the human is played
 4. Answering machine detection (AMD) is started at the same time.
 5. If voicemail greeting is detected by AMD the message for the human is stopped
-6. When the voicemail beep is detected message inteded to be left in the voicemail is started
+6. When the voicemail beep is detected, a message intended for voicemail is played
 7. When the message is completed call is hung up.
 
 >Note: A2P calls are cURL calls to https://external-api.inteliquent.net/v2/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
