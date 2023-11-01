@@ -28,30 +28,30 @@ var wsServers = [
                 rtcpMuxPolicy: 'negotiate',
                 iceServers: [
                   {
-                    url: 'stun:206.147.198.31:3478?transport=udp'
+                    url: 'stun:206.147.198.31:3478'
                   },
                   {
                     url: 'turn:206.147.198.31:3478?transport=udp',
-                    username: '1234567890',
-                    credential: 'XYZABCDEF'
+                    username: '1234567890_askaboutthisvalue',
+                    credential: 'XYZABCDEF_askaboutthisvalue'
                   },
                   {
                     url: 'turn:206.147.198.31:3478?transport=tcp',
-                    username: '1234567890',
-                    credential: 'XYZABCDEF'
+                    username: '1234567890_askaboutthisvalue',
+                    credential: 'XYZABCDEF_askaboutthisvalue'
                   },
                   {
-                    url: 'stun:206.147.130.29:3478?transport=udp'
+                    url: 'stun:206.147.130.29:3478'
                   },
                   {
                     url: 'turn:206.147.130.29:3478?transport=udp',
-                    username: '1234567890',
-                    credential: 'XYZABCDEF'
+                    username: '1234567890_askaboutthisvalue',
+                    credential: 'XYZABCDEF_askaboutthisvalue'
                   },
                   {
                     url: 'turn:206.147.130.29:3478?transport=tcp',
-                    username: '1234567890',
-                    credential: 'XYZABCDEF'
+                    username: '1234567890_askaboutthisvalue',
+                    credential: 'XYZABCDEF_askaboutthisvalue'
                   }
                 ]
               }

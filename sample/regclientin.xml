@@ -3,7 +3,7 @@
     <body>
         <accept alias="from_pstn"/>
         <ring/>
-        <dial caller='{{INBOUND_CALLER_ID}}' number='sip:user@customerdomain.vp.sip.global' alias="to_registered_sip_client">
+        <dial caller='{{INBOUND_CALLER_NUMBER}}' number='sip:user@customerdomain.vp.sip.global' alias="to_registered_sip_client">
             <onConnect>
                 <answer target='from_pstn'>
                     <onConnect>
