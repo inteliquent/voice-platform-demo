@@ -1,10 +1,23 @@
 <script>
     <head/>
     <body>
-        <!-- the existing date and time would normally be received from external system the demo uses these placeholders for ease of demonstration of the usecase -->
-        <save key="existingDate" value="0227"/>
-        <save key="existingTime" value="0300"/>
-        <save key="xyzhealthphonenumber" value="+13156963940"/>
+        <!-- the existing date and time would normally be received from external system -->
+        <save key="xyzhealthphonenumber" value="+17202222222"/>
+        <snippet id="retrieve_customer_schedule">
+            <post url="https://yoursystem.com/schedulingsystem">
+                <header name="Content-Type" value="application/json"/>
+                <![CDATA[
+                    {
+                        "caller_number": "{{INBOUND_CALLER_NUMBER}}"
+                    }
+                ]]>
+                <onComplete>
+                    <!-- save response from your scheduling system -->
+                    <save key="existingDate" value="{{existingDate}}"/>
+                    <save key="existingTime" value="{{existingTime}}"/>
+                </onComplete>
+            </post>
+        </snippet>
         <snippet id="reminder_voicemail">
             <say lang="en-US" voice="Joanna">
                 <![CDATA[<speak>
@@ -58,6 +71,8 @@
             
             
             
+            
+            
             </say>
             <onDTMF digits="????" ref="newDate">
                 <flush event="onDTMF"/>
@@ -69,6 +84,8 @@
             <say lang="en-US" voice="Joanna" group="prompt">
                 <![CDATA[<speak>Please enter the new time for your appointment with first two digits indicating hour, followed by two digits indicating minutes . For example, for 3 PM, enter <say-as interpret-as="digits">0300</say-as></speak>]]>
      
+            
+            
             
             
             
@@ -121,16 +138,19 @@
                 
                 
                 
+                
+                
                 </onAnsweredBy>
                 <onMachineTone>
                     <reminder_voicemail/>
                 </onMachineTone>
             </amd>
         </snippet>
-        <dial caller='{{xyzhealthphonenumber}}' number='+17203197387' alias='a2p'>
+        <dial caller='{{xyzhealthphonenumber}}' number='+17201111111' alias='a2p'>
             <onConnect>
                 <welcome/>
                 <detect_machine/>
+                <retrieve_customer_schedule/>
             </onConnect>
             <onDisconnect>
                 <hangup target='a2p'/>
