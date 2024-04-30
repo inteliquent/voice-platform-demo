@@ -3,12 +3,13 @@
     <body>
         <!-- the existing date and time would normally be received from external system -->
         <save key="xyzhealthphonenumber" value="+17202222222"/>
+        <save key="patientNumber" value="+17201111111"/>
         <snippet id="retrieve_customer_schedule">
             <post url="https://yoursystem.com/schedulingsystem">
                 <header name="Content-Type" value="application/json"/>
                 <![CDATA[
                     {
-                        "caller_number": "{{INBOUND_CALLER_NUMBER}}"
+                        "patientNumber": "{{patientNumber}}"
                     }
                 ]]>
                 <onComplete>
@@ -146,7 +147,7 @@
                 </onMachineTone>
             </amd>
         </snippet>
-        <dial caller='{{xyzhealthphonenumber}}' number='+17201111111' alias='a2p'>
+        <dial caller='{{xyzhealthphonenumber}}' number='{{patientNumber}}' alias='a2p'>
             <onConnect>
                 <welcome/>
                 <detect_machine/>

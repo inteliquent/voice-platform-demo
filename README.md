@@ -29,6 +29,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [Key word spotter](#keyword)
 - [Bi-lingual conversational IVR](#conversationalivr)
 - [AMD with beep detection](#amdbeepdetection)
+- [Appointment reminder](#appointment_reminder)
 - [Busy](#busy)
 
 
@@ -288,6 +289,20 @@ This is an example of an API call that will deliver voice message to a customer 
 5. If voicemail greeting is detected by AMD the message for the human is stopped
 6. When the voicemail beep is detected, a message intended for voicemail is played
 7. When the message is completed call is hung up.
+
+>Note: A2P calls are cURL calls to https://external-api.inteliquent.net/v2/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
+
+#### Appointment Reminder <a href='#appointment_reminder' id='appointement_reminder' class='anchor' aria-hidden='true'></a> [see xml](/sample/appointement_reminder.xml)
+
+This is an example of an API call that call customer and reminder of their medical appointemnt and will allow them to change it if required
+
+1. Call to patient's number is dialed
+2. API call to your scheduling system is initiated based on patient's number to retrieve any existing appointment times to remind them off
+3. Patient hears welcome message with appointment reminder
+4. Answering machine detection (AMD) is started at the same time and follows the logic in the previous example
+5. Customer is given a choice to keep the existing time or reschedule
+6. If they reschedule the newly entered dates are sent back to the scheduling system and if desired time is confirmed patient is notified
+7. If date and time are not available Patient is notified and they are asked to dial the office to reschedule their appintment
 
 >Note: A2P calls are cURL calls to https://external-api.inteliquent.net/v2/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
 
