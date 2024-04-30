@@ -292,7 +292,7 @@ This is an example of an API call that will deliver voice message to a customer 
 
 >Note: A2P calls are cURL calls to https://external-api.inteliquent.net/v2/callback/submit?apiKey= , API Key is required before this API endpoint can be used. Above is an example of XML script included in the cURL.
 
-#### Appointment Reminder <a href='#appointment_reminder' id='appointement_reminder' class='anchor' aria-hidden='true'></a> [see xml](/sample/appointement_reminder.xml)
+#### Appointment Reminder <a href='#appointment_reminder' id='appointment_reminder' class='anchor' aria-hidden='true'></a> [see xml](/sample/appointment_reminder.xml)
 
 This is an example of an API call that call customer and reminder of their medical appointemnt and will allow them to change it if required
 
