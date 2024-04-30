@@ -1,0 +1,140 @@
+<script>
+    <head/>
+    <body>
+        <!-- the existing date and time would normally be received from external system -->
+        <save key="existingDate" value="0227"/>
+        <save key="existingTime" value="0300"/>
+        <save key="xyzhealthphonenumber" value="+13156963940"/>
+        <snippet id="reminder_voicemail">
+            <say lang="en-US" voice="Joanna">
+                <![CDATA[<speak>
+     Hello. This is a reminder from XYZ Health that Your next appointment is scheduled for <say-as interpret-as="date">????{{existingDate}}</say-as>,at<say-as interpret-as="time" format="hms12">{{existingTime}}p</say-as>,If you have any questions or would like to reschedule, please call us back at<say-as interpret-as="telephone">{{xyzhealthphonenumber}}</say-as></speak>]]>
+                <onComplete>
+                    <hangup/>
+                </onComplete>
+            </say>
+        </snippet>
+        <snippet id="welcome">
+            <say text="Hello. This is a reminder from XYZ Health. Please press any key to continue." lang="en-US" voice="Joanna" group="prompt">
+                <onDTMF>
+                    <flush event="onDTMF"/>
+                    <stop-play target-group="prompt"/>
+                    <reminder/>
+                </onDTMF>
+                <onComplete>
+                    <amd/>
+                </onComplete>
+            </say>
+        </snippet>
+        <snippet id="reminder">
+            <say lang="en-US" voice="Joanna" group="prompt">
+                <![CDATA[<speak>
+     Your appointment is scheduled for <say-as interpret-as="date">????{{existingDate}}</say-as>,at<say-as interpret-as="time" format="hms12">{{existingTime}}p</say-as></speak>]]>
+                <onComplete>
+                    <stop-play target-group="prompt"/>
+                    <repeat/>
+                </onComplete>
+            </say>
+        </snippet>
+        <snippet id="repeat">
+            <say text="To hear this reminder again, press 1. If you would like to reschedule this appointment, press 2." lang="en-US" voice="Joanna" group="prompt">
+                <onDTMF digits="1">
+                    <flush event="onDTMF"/>
+                    <stop-play target-group="prompt"/>
+                    <reminder/>
+                </onDTMF>
+                <onDTMF digits="2">
+                    <flush event="onDTMF"/>
+                    <stop-play target-group="prompt"/>
+                    <collect_date/>
+                </onDTMF>
+            </say>
+        </snippet>
+        <snippet id="collect_date">
+            <say lang="en-US" voice="Joanna" group="prompt">
+                <![CDATA[<speak>Please enter the new date for your appointment with first two digits indicating day, followed by two digits indicating month . For example for December 5, enter <say-as interpret-as="digits">1205</say-as></speak>]]>
+     
+            
+            
+            
+            
+            </say>
+            <onDTMF digits="????" ref="newDate">
+                <flush event="onDTMF"/>
+                <stop-play target-group="prompt"/>
+                <collect_time/>
+            </onDTMF>
+        </snippet>
+        <snippet id="collect_time">
+            <say lang="en-US" voice="Joanna" group="prompt">
+                <![CDATA[<speak>Please enter the new time for your appointment with first two digits indicating hour, followed by two digits indicating minutes . For example, for 3 PM, enter <say-as interpret-as="digits">0300</say-as></speak>]]>
+     
+            
+            
+            
+            
+            </say>
+            <onDTMF digits="????" ref="newTime">
+                <flush event="onDTMF"/>
+                <stop-play target-group="prompt"/>
+                <confirm_reschedule type="time"/>
+            </onDTMF>
+        </snippet>
+        <snippet id="confirm_reschedule">
+            <post url="https://yoursystem.com/schedulingsystem">
+                <header name="Content-Type" value="application/json"/>
+                <![CDATA[
+                    {
+                        "newDate": "{{newDate}}",
+                        "newTime": "{{newTime}}",
+                    }
+                ]]>
+                <onComplete>
+                    <match a="{{status}}" b="confirmed">
+                        <onTrue>
+                            <say lang="en-US" voice="Joanna" group="prompt">
+                                <![CDATA[<speak>
+     Your appointment has been successfully rescheduled for <say-as interpret-as="date">????{{newDate}}</say-as>,at<say-as interpret-as="time" format="hms12">{{newTime}}p</say-as></speak>]]>
+                                <onComplete>
+                                    <hangup/>
+                                </onComplete>
+                            </say>
+                        </onTrue>
+                        <onFalse>
+                            <say text="We were unable to reschedule your appointment. Please try again or call our office at 720-123-4567." lang="en-US" voice="Joanna">
+                                <onComplete>
+                                    <reschedule_menu/>
+                                </onComplete>
+                            </say>
+                        </onFalse>
+                    </match>
+                </onComplete>
+            </post>
+        </snippet>
+        <snippet id='detect_machine'>
+            <!-- declare snippet that will handle machine detection -->
+            <amd machine-max-silence-period='1500' continuous-tone-detection='true'>
+                <onAnsweredBy type="machine">
+                    <stop-play target-group="prompt"/>
+                    <!-- if voicemail greeting is detected stop playing message intended for the human -->
+                
+                
+                
+                
+                </onAnsweredBy>
+                <onMachineTone>
+                    <reminder_voicemail/>
+                </onMachineTone>
+            </amd>
+        </snippet>
+        <dial caller='{{xyzhealthphonenumber}}' number='+17203197387' alias='a2p'>
+            <onConnect>
+                <welcome/>
+                <detect_machine/>
+            </onConnect>
+            <onDisconnect>
+                <hangup target='a2p'/>
+            </onDisconnect>
+        </dial>
+    </body>
+</script>
