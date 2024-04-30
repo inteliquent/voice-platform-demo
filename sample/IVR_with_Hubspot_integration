@@ -1,0 +1,310 @@
+<script>
+    <head/>
+    <body>
+        <snippet id="lookup_customer">
+            <post url="https://api.hubapi.com/crm/v3/objects/contacts/search">
+                <header name="Authorization" value="Bearer yourhubpostcredentials"/>
+                <![CDATA[
+                    {
+                        "filterGroups":[
+                            {
+                                "filters":[
+                                    {
+                                        "propertyName": "phone",
+                                        "operator": "EQ",
+                                        "value": "{{INBOUND_CALLER_NUMBER}}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "properties": ["firstname", "lastname", "email", "last_order", "credit_card_number", "id"]
+                    }
+                ]]>
+                <onComplete code='200'>
+                    <save key='customer_firstname' value='{{results[0].properties.firstname}}' />
+                    <save key='customer_lastname' value='{{results[0].properties.lastname}}' />
+                    <save key='customer_email' value='{{results[0].properties.email}}' />
+                    <save key='customer_last_order' value='{{results[0].properties.last_order}}' />
+                    <save key='customer_credit_card_number' value='{{results[0].properties.credit_card_number}}' />
+                    <save key='hubspot_contact_id' value='{{results[0].id}}' />
+                    <save key='cc_4digits' value='{{$substring(customer_credit_card_number,12,4)}}'/>
+                    <match a="{{customer_lastname}}" b="">
+                        <onTrue>
+                            <new_customer/>
+                        </onTrue>
+                        <onFalse>
+                            <welcome_customer/>
+                        </onFalse>
+                    </match>
+                </onComplete>
+            </post>
+        </snippet>
+
+        <snippet id="new_customer">
+            <say text="Hello, welcome to the Sunshine Pizza, the best pizza shop around. Let's start by selecting the size of your pizza.">
+                <onComplete>
+            <select_pizza_size/>
+            </onComplete>
+            </say>
+        </snippet>
+
+        <snippet id="welcome_customer">
+            <say text="Welcome back {{customer_firstname}}. Would you like to repeat your last order of {{customer_last_order}}? Press 1 for yes, 2 for no." group="welcome_prompt"/>
+            <onDTMF digits="1">
+                <flush event="onDTMF"/>
+                <stop-play target-group="welcome_prompt"/>
+                <save key="selected_pizza" value="{{customer_last_order}}"/>
+                <confirm_credit_card_use/>
+            </onDTMF>
+            <onDTMF digits="2">
+                <flush event="onDTMF"/>
+                <stop-play target-group="welcome_prompt"/>
+                <select_pizza_size/>
+                <save key='customer_last_order' value='' />
+            </onDTMF>
+        </snippet>
+
+        <snippet id="select_pizza_size">
+            <say text="Please select the size of your pizza. For Mini, press 1. For Small, press 2. For Medium, press 3. For Large, press 4. For Jumbo, press 5." group="size_prompt"/>
+            <onDTMF digits="1">
+                <flush event="onDTMF"/>
+                <stop-play target-group="size_prompt"/>
+                <save key="selected_size" value="Mini"/>
+                <select_pizza_flavor/>
+            </onDTMF>
+            <onDTMF digits="2">
+                <flush event="onDTMF"/>
+                <stop-play target-group="size_prompt"/>
+                <save key="selected_size" value="Small"/>
+                <select_pizza_flavor/>
+            </onDTMF>
+            <onDTMF digits="3">
+                <flush event="onDTMF"/>
+                <stop-play target-group="size_prompt"/>
+                <save key="selected_size" value="Medium"/>
+                <select_pizza_flavor/>
+            </onDTMF>
+            <onDTMF digits="4">
+                <flush event="onDTMF"/>
+                <stop-play target-group="size_prompt"/>
+                <save key="selected_size" value="Large"/>
+                <select_pizza_flavor/>
+            </onDTMF>
+            <onDTMF digits="5">
+                <flush event="onDTMF"/>
+                <stop-play target-group="size_prompt"/>
+                <save key="selected_size" value="Jumbo"/>
+                <select_pizza_flavor/>
+            </onDTMF>
+        </snippet>
+
+        <snippet id="select_pizza_flavor">
+            <say text="Please select your pizza flavor. For Classic Combo, press 1. For Taco Pie, press 2. For All-Meat Combo, press 3. For Bacon Cheeseburger, press 4. For more options, press 5." group="flavor_prompt"/>
+            <onDTMF digits="1">
+                <flush event="onDTMF"/>
+                <stop-play target-group="flavor_prompt"/>
+                <save key="selected_flavor" value="Classic Combo"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="2">
+                <flush event="onDTMF"/>
+                <stop-play target-group="flavor_prompt"/>
+                <save key="selected_flavor" value="Taco Pie"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="3">
+                <flush event="onDTMF"/>
+                <stop-play target-group="flavor_prompt"/>
+                <save key="selected_flavor" value="All-Meat Combo"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="4">
+                <flush event="onDTMF"/>
+                <stop-play target-group="flavor_prompt"/>
+                <save key="selected_flavor" value="Bacon Cheeseburger"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="5">
+                <flush event="onDTMF"/>
+                <stop-play target-group="flavor_prompt"/>
+                <additional_pizza_flavors/>
+            </onDTMF>
+        </snippet>
+
+        <snippet id="additional_pizza_flavors">
+            <say text="For Hawaiian, press 1. For Hot Stuff, press 2. For Humble Pie, press 3. For Veggie Pie, press 4. To make it a Super Combo, press 5. To make it a Super Taco, press 6." group="additional_flavors_prompt"/>
+            <onDTMF digits="1">
+                <flush event="onDTMF"/>
+                <stop-play target-group="additional_flavors_prompt"/>
+                <save key="selected_flavor" value="Hawaiian"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="2">
+                <flush event="onDTMF"/>
+                <stop-play target-group="additional_flavors_prompt"/>
+                <save key="selected_flavor" value="Hot Stuff"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="3">
+                <flush event="onDTMF"/>
+                <stop-play target-group="additional_flavors_prompt"/>
+                <save key="selected_flavor" value="Humble Pie"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="4">
+                <flush event="onDTMF"/>
+                <stop-play target-group="additional_flavors_prompt"/>
+                <save key="selected_flavor" value="Veggie Pie"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="5">
+                <flush event="onDTMF"/>
+                <stop-play target-group="additional_flavors_prompt"/>
+                <save key="selected_flavor" value="Super Combo"/>
+                <confirm_order/>
+            </onDTMF>
+            <onDTMF digits="6">
+                <flush event="onDTMF"/>
+                <stop-play target-group="additional_flavors_prompt"/>
+                <save key="selected_flavor" value="Super Taco"/>
+                <confirm_order/>
+            </onDTMF>
+        </snippet>
+
+        <snippet id="confirm_order">
+            <say text="You have selected a {{selected_size}} {{selected_flavor}} pizza. To confirm, press 1. To change your order, press 2." group="confirm_prompt"/>
+            <onDTMF digits="1">
+                <flush event="onDTMF"/>
+                <stop-play target-group="confirm_prompt"/>
+                <confirm_credit_card_use/>
+            </onDTMF>
+            <onDTMF digits="2">
+                <flush event="onDTMF"/>
+                <stop-play target-group="confirm_prompt"/>
+                <select_pizza_size/>
+            </onDTMF>
+        </snippet>
+
+        <snippet id="confirm_credit_card_use">
+            <match a="{{customer_lastname}}" b="">
+                <onTrue>
+                    <collect_card_number/>
+                </onTrue>
+                <onFalse>
+                    <say text="Would you like to use the credit card ending in {{cc_4digits}} for this order? Press 1 for yes, 2 for no." group="credit_card_prompt"/>
+                    <onDTMF digits="1">
+                        <flush event="onDTMF"/>
+                        <stop-play target-group="credit_card_prompt"/>
+                        <save key="credit_card_number" value="{{customer_credit_card_number}}"/>
+                        <collect_expiration_date/>
+                    </onDTMF>
+                    <onDTMF digits="2">
+                        <flush event="onDTMF"/>
+                        <stop-play target-group="credit_card_prompt"/>
+                        <collect_card_number/>
+                    </onDTMF>
+                </onFalse>
+            </match>
+        </snippet>
+
+        <snippet id="collect_card_number">
+            <say text="Please enter your 16-digit credit card number." group="card_number_prompt"/>
+            <onDTMF digits="????????????????" ref="credit_card_number">
+                <flush event="onDTMF"/>
+                <stop-play target-group="card_number_prompt"/>
+                <collect_expiration_date/>
+            </onDTMF>
+        </snippet>
+
+        <snippet id="collect_expiration_date">
+            <say text="Please enter your card's 4-digit expiration date with first two digits representing month and the last two digits represnting year." group="expiration_prompt"/>
+            <onDTMF digits="????" ref="expiration_date">
+                <flush event="onDTMF"/>
+                <stop-play target-group="expiration_prompt"/>
+                <collect_security_code/>
+            </onDTMF>
+        </snippet>
+
+        <snippet id="collect_security_code">
+            <say text="Please enter your card's 3-digit security code." group="security_code_prompt"/>
+            <onDTMF digits="???" ref="security_code">
+                <flush event="onDTMF"/>
+                <stop-play target-group="security_code_prompt"/>
+                <process_payment/>
+            </onDTMF>
+        </snippet>
+
+        <snippet id="process_payment">
+            <post url="https://yourpaymentgateway/paymentgateway">
+                <header name="Content-Type" value="application/json"/>
+                <![CDATA[
+                    {
+                        "card_number": "{{credit_card_number}}",
+                        "expiration_date": "{{expiration_date}}",
+                        "security_code": "{{security_code}}",
+                        "order": "{{selected_size}} {{selected_flavor}} {{customer_last_order}} pizza"
+                    }
+                ]]>
+                <onComplete>
+                    <submit_order/>
+                </onComplete>
+            </post>
+        </snippet>
+
+        <snippet id="submit_order">
+            <post url="https://yourorderingsystem/restaurantorderingsystem">
+                <header name="Content-Type" value="application/json"/>
+                <![CDATA[
+                    {
+                        "customer": {
+                            "firstname": "{{customer_firstname}}",
+                            "lastname": "{{customer_lastname}}",
+                            "email": "{{customer_email}}",
+                            "phone": "{{INBOUND_CALLER_NUMBER}}"
+                        },
+                        "order": "{{selected_size}} {{selected_flavor}} {{customer_last_order}} pizza"
+                    }
+                ]]>
+                <onComplete>
+                    <update_hubspot_last_order/>
+                </onComplete>
+            </post>
+        </snippet>
+
+        <snippet id="update_hubspot_last_order">
+            <post url="https://api.hubapi.com/crm/v3/objects/contacts/batch/update">
+                <header name="Authorization" value="Bearer yourhubpostcredentials"/>
+                <header name="Content-Type" value="application/json"/>
+                <![CDATA[
+                    {
+                        "inputs": [
+                            {
+                                "id": "{{hubspot_contact_id}}",
+                                "properties": {
+                                    "last_order": "{{selected_size}} {{selected_flavor}} {{customer_last_order}} pizza"
+                                }
+                            }
+                        ]
+                    }
+                ]]>
+                <onComplete>
+                    <say text="Thank you for your order, your pizza will be ready shortly" group="security_code_prompt">
+                        <onConnect>
+                            <hangup/>
+                        </onComplete>
+                    <say/>
+                </onComplete>
+                
+            </post>
+        </snippet>
+
+
+        <accept/>
+        <ring/>
+        <answer>
+            <onConnect>
+                <lookup_customer/>
+            </onConnect>
+        </answer>
+    </body>
+</script>

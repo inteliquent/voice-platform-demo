@@ -24,6 +24,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [Voicemail](#voicemail)
 - [Outbound A2P call](#a2p)
 - [IVR](#ivr)
+- [IVR with Hubspot integration](#IVR_with_Hubspot_integration)
 - [Authenticated conference](#conferenceroom)
 - [Live transcription](#livetranscription)
 - [Key word spotter](#keyword)
@@ -218,6 +219,22 @@ This code plays back the number pressed on your keypad.
 9. Depending on the digit pressed the user hears `Your pressed digit`.
 10. User is returned to the main menu and can press any of the digits again.
 11. Limit of 99 loops is put on the IVR.
+
+#### IVR with Hubspot Integration <a href='#IVR_with_Hubspot_integration' id='IVR_with_Hubspot_integration' class='anchor' aria-hidden='true'></a> [see xml](/sample/IVR_with_Hubspot_integration.xml)
+
+This code is for complex Pizza shop IVR that personalizes the customer experience thanks to integration with Hubspot
+
+1. Customer information is looked up based on their calling number
+2. If record is found, customer is greeted by their name
+3. They are offered the option to order what they had last time
+4. They are also offer to use credit card on file 
+5. If they want to make a new choice they are given that option and can choose both size and type of pizza.
+6. Their order is repeated
+7. They can still use their card on file or can enter new credit card
+8. Credit card information is sent to payement gateway
+9. Order information is sent to the restaurants POS system
+10. Caller hears a thank you messege and call hangs up.
+
 
 #### Authenticated Conference <a href='#conferenceroom' id='conferenceroom' class='anchor' aria-hidden='true'></a> [see xml](/sample/conferenceroom.xml)
 
