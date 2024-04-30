@@ -1,7 +1,7 @@
 <script>
     <head/>
     <body>
-        <!-- the existing date and time would normally be received from external system -->
+        <!-- the existing date and time would normally be received from external system the demo uses these placeholders for ease of demonstration of the usecase -->
         <save key="existingDate" value="0227"/>
         <save key="existingTime" value="0300"/>
         <save key="xyzhealthphonenumber" value="+13156963940"/>
