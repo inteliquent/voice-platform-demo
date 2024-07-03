@@ -11,6 +11,10 @@
                     <onConnect>
                         <join target="outbound_call"/>
                     </onConnect>
+                    <onDisconnect>
+                        <hangup target="inbound_call"/>
+                        <hangup target="outbound_call"/>
+                    </onDisconnect>
                 </answer>
             </onConnect>
             <onDisconnect>
@@ -18,9 +22,5 @@
                 <hangup target="outbound_call"/>
             </onDisconnect>
         </dial>
-        <onDisconnect>
-            <hangup target="inbound_call"/>
-            <hangup target="outbound_call"/>
-        </onDisconnect>
     </body>
 </script>
