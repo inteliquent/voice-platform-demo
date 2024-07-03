@@ -20,10 +20,10 @@
                     </onDisconnect>
                 </answer>
             </onConnect>
+            <onDisconnect>
+                <hangup target='from_pstn'/>
+                <hangup target='to_sip_client'/>
+            </onDisconnect>
         </dial>
-        <onDisconnect>
-            <hangup target='from_pstn'/>
-            <hangup target='to_sip_client'/>
-        </onDisconnect>
     </body>
 </script>
