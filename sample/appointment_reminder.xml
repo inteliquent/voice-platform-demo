@@ -35,9 +35,6 @@
                     <stop-play target-group="prompt"/>
                     <reminder/>
                 </onDTMF>
-                <onComplete>
-                    <amd/>
-                </onComplete>
             </say>
         </snippet>
         <snippet id="reminder">
