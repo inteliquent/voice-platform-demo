@@ -1,0 +1,139 @@
+<script>
+    <head/>
+    <body>
+        <snippet id="select_language">
+            <say text="For English, press 1." lang="en-US" voice="Ruth" engine="generative" group="language_prompt">
+                <onComplete>
+                    <say text="Para español, presione 2." lang="es-US" voice="Lupe" engine="generative" group="language_prompt"/>
+                </onComplete>
+            </say>
+            <gather numDigits="1" input="DTMF" timeout="30">
+                <onGather value="1">
+                    <save key="SELECTED_LANGUAGE" value="en-US"/>
+                    <save key="SELECTED_VOICE" value="Ruth"/>
+                    <save key="SELECTED_ENGINE" value="generative"/>
+                    <select_pizza/>
+                </onGather>
+                <onGather value="2">
+                    <save key="SELECTED_LANGUAGE" value="es-US"/>
+                    <save key="SELECTED_VOICE" value="Lupe"/>
+                    <save key="SELECTED_ENGINE" value="generative"/>
+                    <select_pizza/>
+                </onGather>
+                <onGather value="no_input">
+                    <say text="Goodbye." lang="en-US" voice="Ruth" engine="generative">
+                        <onComplete>
+                            <hangup/>
+                        </onComplete>
+                    </say>
+                </onGather>
+            </gather>
+        </snippet>
+
+        <snippet id="select_pizza">
+            <save key="TEXT-en-US" value="Please select your pizza. For Margherita, press 1. For Pepperoni, press 2. For Hawaiian, press 3." />
+            <save key="TEXT-es-US" value="Por favor, seleccione su pizza. Para Margarita, presione 1. Para Pepperoni, presione 2. Para Hawaiana, presione 3." />
+            <load key="SELECTED_TEXT" from="TEXT-{{SELECTED_LANGUAGE}}" local="true"/>
+            <stop-play target-group="language_prompt"/>
+            <gather numDigits="1" input="DTMF" timeout="30" say="{{SELECTED_TEXT}}" lang="{{SELECTED_LANGUAGE}}" voice="{{SELECTED_VOICE}}" engine="{{SELECTED_ENGINE}}">
+                <onGather value="1">
+                    <save key="SELECTED_PIZZA" value="Margherita"/>
+                    <summarize_order/>
+                </onGather>
+                <onGather value="2">
+                    <save key="SELECTED_PIZZA" value="Pepperoni"/>
+                    <summarize_order/>
+                </onGather>
+                <onGather value="3">
+                    <save key="SELECTED_PIZZA" value="Hawaiian"/>
+                    <summarize_order/>
+                </onGather>
+                <onGather value="no_input">
+                    <save key="TEXT-en-US" value="Goodbye."/>
+                    <save key="TEXT-es-US" value="Adiós."/>
+                    <load key="SELECTED_TEXT" from="TEXT-{{SELECTED_LANGUAGE}}" local="true"/>
+                    <say text="{{SELECTED_TEXT}}" lang="{{SELECTED_LANGUAGE}}" voice="{{SELECTED_VOICE}}" engine="{{SELECTED_ENGINE}}" alias="pizza_timeout_prompt">
+                        <onComplete>
+                            <hangup/>
+                        </onComplete>
+                    </say>
+                </onGather>
+                <onGather>
+                    <save key="TEXT-en-US" value="Invalid selection. Please try again."/>
+                    <save key="TEXT-es-US" value="Selección inválida. Por favor intente de nuevo."/>
+                    <load key="SELECTED_TEXT" from="TEXT-{{SELECTED_LANGUAGE}}" local="true"/>
+                    <say text="{{SELECTED_TEXT}}" lang="{{SELECTED_LANGUAGE}}" voice="{{SELECTED_VOICE}}" engine="{{SELECTED_ENGINE}}" alias="pizza_prompt">
+                        <onComplete>
+                            <select_pizza/>
+                        </onComplete>
+                    </say>
+                </onGather>
+            </gather>
+        </snippet>
+
+        <snippet id="summarize_order">
+            <save key="TEXT-en-US" value="You have selected a {{SELECTED_PIZZA}} pizza. To confirm, press 1. To start over, press 2." />
+            <save key="TEXT-es-US" value="Ha seleccionado una pizza {{SELECTED_PIZZA}}. Para confirmar, presione 1. Para empezar de nuevo, presione 2." />
+            <load key="SELECTED_TEXT" from="TEXT-{{SELECTED_LANGUAGE}}" local="true"/>
+            <gather numDigits="1" input="DTMF" timeout="30" say="{{SELECTED_TEXT}}" lang="{{SELECTED_LANGUAGE}}" voice="{{SELECTED_VOICE}}" engine="{{SELECTED_ENGINE}}">
+                <onGather value="1">
+                    <process_payment/>
+                </onGather>
+                <onGather value="2">
+                    <select_pizza/>
+                </onGather>
+            </gather>
+        </snippet>
+
+        <snippet id="process_payment">
+            <save key="TEXT-en-US" value="Please enter your credit card number followed by the pound key." />
+            <save key="TEXT-es-US" value="Por favor, ingrese su número de tarjeta de crédito seguido de la tecla numeral." />
+            <load key="SELECTED_TEXT" from="TEXT-{{SELECTED_LANGUAGE}}" local="true"/>
+            <gather input="DTMF" finishOnKey="#" say="{{SELECTED_TEXT}}" lang="{{SELECTED_LANGUAGE}}" voice="{{SELECTED_VOICE}}" engine="{{SELECTED_ENGINE}}">
+                <onGather _value="creditCardNumber">
+                    <save key="CREDIT_CARD_NUMBER" value="{{creditCardNumber}}"/>
+                    <finalize_order/>
+                </onGather>
+                <onGather value="no_input">
+                    <save key="TEXT-en-US" value="Goodbye."/>
+                    <save key="TEXT-es-US" value="Adiós."/>
+                    <load key="SELECTED_TEXT" from="TEXT-{{SELECTED_LANGUAGE}}" local="true"/>
+                    <say text="{{SELECTED_TEXT}}" lang="{{SELECTED_LANGUAGE}}" voice="{{SELECTED_VOICE}}" engine="{{SELECTED_ENGINE}}" alias="payment_timeout_prompt">
+                        <onComplete>
+                            <hangup/>
+                        </onComplete>
+                    </say>
+                </onGather>
+            </gather>
+        </snippet>
+
+        <snippet id="finalize_order">
+            <post url="https://webhook.site/a8332f03-00ce-409c-ae73-aace20afbbe4/order-api">
+                <![CDATA[
+                    {
+                        "selected_pizza": "{{SELECTED_PIZZA}}",
+                        "credit_card_number": "{{CREDIT_CARD_NUMBER}}"
+                    }
+                ]]>
+                <onComplete>
+                    <save key="TEXT-en-US" value="Thank you for your order. Your pizza will be delivered shortly." />
+                    <save key="TEXT-es-US" value="Gracias por su pedido. Su pizza será entregada en breve." />
+                    <load key="SELECTED_TEXT" from="TEXT-{{SELECTED_LANGUAGE}}" local="true"/>
+                    <say text="{{SELECTED_TEXT}}" lang="{{SELECTED_LANGUAGE}}" voice="{{SELECTED_VOICE}}" engine="{{SELECTED_ENGINE}}" alias="order_confirmation">
+                        <onComplete>
+                            <hangup/>
+                        </onComplete>
+                    </say>
+                </onComplete>
+            </post>
+        </snippet>
+
+        <accept/>
+        <ring/>
+        <answer alias="inbound_call">
+            <onConnect>
+                <select_language/>
+            </onConnect>
+        </answer>
+    </body>
+</script>
