@@ -267,18 +267,17 @@ This code will answer a call, record what the caller says and return the transcr
 
 #### Key Word Spotter <a href='#keyword' id='keyword' class='anchor' aria-hidden='true'></a> [see xml](/sample/keyword.xml)
 
-This code will return webhook whenever specified word is uttered.
+This code will return webhook when specified word is uttered.
 
-1. GCP authentication and account information is declared
-2. Call is answered
-3. Prompt is played
-4. Recording with max duration of 10 seconds is started
-5. Key word spotting service is declared with spotting for words "Yes" and "No". 
-6. Webhook information for what information should be sent to webhook whenever each word is detected is specified.
-7. Upon expiration of 10 second timer call is hung up
-8. Link to the recording is sent to specified webhook
+1. Call is answered
+2. Prompt is played
+3. Key word spotting service is declared with spotting for words "Yes" and "No". 
+4. Webhook information for what information should be sent to webhook once either word is detected is specified.
+5. When key word is detected Webhook with that word is sent
+6. Detected word is repeated
+7. Call is Hung up
 
->Note: For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/stream)
+>Note: For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/gather)
 
 #### Bi-lingual Conversational IVR <a href='#conversationalivr' id='conversationalivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/conversationalivr.xml)
 
