@@ -43,146 +43,111 @@
         <snippet id="new_customer">
             <say text="Hello, welcome to the Sunshine Pizza, the best pizza shop around. Let's start by selecting the size of your pizza.">
                 <onComplete>
-            <select_pizza_size/>
-            </onComplete>
+                    <select_pizza_size/>
+                </onComplete>
             </say>
         </snippet>
 
         <snippet id="welcome_customer">
-            <say text="Welcome back {{customer_firstname}}. Would you like to repeat your last order of {{customer_last_order}}? Press 1 for yes, 2 for no." group="welcome_prompt"/>
-            <onDTMF digits="1">
-                <flush event="onDTMF"/>
-                <stop-play target-group="welcome_prompt"/>
-                <save key="selected_pizza" value="{{customer_last_order}}"/>
-                <confirm_credit_card_use/>
-            </onDTMF>
-            <onDTMF digits="2">
-                <flush event="onDTMF"/>
-                <stop-play target-group="welcome_prompt"/>
-                <select_pizza_size/>
-                <save key='customer_last_order' value='' />
-            </onDTMF>
+            <gather numDigits="1" input="DTMF" say="Welcome back {{customer_firstname}}. Would you like to repeat your last order of {{customer_last_order}}? Press 1 for yes, 2 for no." lang="en-US" voice="Ruth" engine="generative">
+                <onGather value="1">
+                    <save key="selected_pizza" value="{{customer_last_order}}"/>
+                    <confirm_credit_card_use/>
+                </onGather>
+                <onGather value="2">
+                    <select_pizza_size/>
+                    <save key='customer_last_order' value='' />
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="select_pizza_size">
-            <say text="Please select the size of your pizza. For Mini, press 1. For Small, press 2. For Medium, press 3. For Large, press 4. For Jumbo, press 5." group="size_prompt"/>
-            <onDTMF digits="1">
-                <flush event="onDTMF"/>
-                <stop-play target-group="size_prompt"/>
-                <save key="selected_size" value="Mini"/>
-                <select_pizza_flavor/>
-            </onDTMF>
-            <onDTMF digits="2">
-                <flush event="onDTMF"/>
-                <stop-play target-group="size_prompt"/>
-                <save key="selected_size" value="Small"/>
-                <select_pizza_flavor/>
-            </onDTMF>
-            <onDTMF digits="3">
-                <flush event="onDTMF"/>
-                <stop-play target-group="size_prompt"/>
-                <save key="selected_size" value="Medium"/>
-                <select_pizza_flavor/>
-            </onDTMF>
-            <onDTMF digits="4">
-                <flush event="onDTMF"/>
-                <stop-play target-group="size_prompt"/>
-                <save key="selected_size" value="Large"/>
-                <select_pizza_flavor/>
-            </onDTMF>
-            <onDTMF digits="5">
-                <flush event="onDTMF"/>
-                <stop-play target-group="size_prompt"/>
-                <save key="selected_size" value="Jumbo"/>
-                <select_pizza_flavor/>
-            </onDTMF>
+            <gather numDigits="1" input="DTMF" say="Please select the size of your pizza. For Mini, press 1. For Small, press 2. For Medium, press 3. For Large, press 4. For Jumbo, press 5." lang="en-US" voice="Ruth" engine="generative">
+                <onGather value="1">
+                    <save key="selected_size" value="Mini"/>
+                    <select_pizza_flavor/>
+                </onGather>
+                <onGather value="2">
+                    <save key="selected_size" value="Small"/>
+                    <select_pizza_flavor/>
+                </onGather>
+                <onGather value="3">
+                    <save key="selected_size" value="Medium"/>
+                    <select_pizza_flavor/>
+                </onGather>
+                <onGather value="4">
+                    <save key="selected_size" value="Large"/>
+                    <select_pizza_flavor/>
+                </onGather>
+                <onGather value="5">
+                    <save key="selected_size" value="Jumbo"/>
+                    <select_pizza_flavor/>
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="select_pizza_flavor">
-            <say text="Please select your pizza flavor. For Classic Combo, press 1. For Taco Pie, press 2. For All-Meat Combo, press 3. For Bacon Cheeseburger, press 4. For more options, press 5." group="flavor_prompt"/>
-            <onDTMF digits="1">
-                <flush event="onDTMF"/>
-                <stop-play target-group="flavor_prompt"/>
-                <save key="selected_flavor" value="Classic Combo"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="2">
-                <flush event="onDTMF"/>
-                <stop-play target-group="flavor_prompt"/>
-                <save key="selected_flavor" value="Taco Pie"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="3">
-                <flush event="onDTMF"/>
-                <stop-play target-group="flavor_prompt"/>
-                <save key="selected_flavor" value="All-Meat Combo"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="4">
-                <flush event="onDTMF"/>
-                <stop-play target-group="flavor_prompt"/>
-                <save key="selected_flavor" value="Bacon Cheeseburger"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="5">
-                <flush event="onDTMF"/>
-                <stop-play target-group="flavor_prompt"/>
-                <additional_pizza_flavors/>
-            </onDTMF>
+            <gather numDigits="1" input="DTMF" say="Please select your pizza flavor. For Classic Combo, press 1. For Taco Pie, press 2. For All-Meat Combo, press 3. For Bacon Cheeseburger, press 4. For more options, press 5." lang="en-US" voice="Ruth" engine="generative">
+                <onGather value="1">
+                    <save key="selected_flavor" value="Classic Combo"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="2">
+                    <save key="selected_flavor" value="Taco Pie"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="3">
+                    <save key="selected_flavor" value="All-Meat Combo"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="4">
+                    <save key="selected_flavor" value="Bacon Cheeseburger"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="5">
+                    <additional_pizza_flavors/>
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="additional_pizza_flavors">
-            <say text="For Hawaiian, press 1. For Hot Stuff, press 2. For Humble Pie, press 3. For Veggie Pie, press 4. To make it a Super Combo, press 5. To make it a Super Taco, press 6." group="additional_flavors_prompt"/>
-            <onDTMF digits="1">
-                <flush event="onDTMF"/>
-                <stop-play target-group="additional_flavors_prompt"/>
-                <save key="selected_flavor" value="Hawaiian"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="2">
-                <flush event="onDTMF"/>
-                <stop-play target-group="additional_flavors_prompt"/>
-                <save key="selected_flavor" value="Hot Stuff"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="3">
-                <flush event="onDTMF"/>
-                <stop-play target-group="additional_flavors_prompt"/>
-                <save key="selected_flavor" value="Humble Pie"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="4">
-                <flush event="onDTMF"/>
-                <stop-play target-group="additional_flavors_prompt"/>
-                <save key="selected_flavor" value="Veggie Pie"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="5">
-                <flush event="onDTMF"/>
-                <stop-play target-group="additional_flavors_prompt"/>
-                <save key="selected_flavor" value="Super Combo"/>
-                <confirm_order/>
-            </onDTMF>
-            <onDTMF digits="6">
-                <flush event="onDTMF"/>
-                <stop-play target-group="additional_flavors_prompt"/>
-                <save key="selected_flavor" value="Super Taco"/>
-                <confirm_order/>
-            </onDTMF>
+            <gather numDigits="1" input="DTMF" say="For Hawaiian, press 1. For Hot Stuff, press 2. For Humble Pie, press 3. For Veggie Pie, press 4. To make it a Super Combo, press 5. To make it a Super Taco, press 6." lang="en-US" voice="Ruth" engine="generative">
+                <onGather value="1">
+                    <save key="selected_flavor" value="Hawaiian"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="2">
+                    <save key="selected_flavor" value="Hot Stuff"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="3">
+                    <save key="selected_flavor" value="Humble Pie"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="4">
+                    <save key="selected_flavor" value="Veggie Pie"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="5">
+                    <save key="selected_flavor" value="Super Combo"/>
+                    <confirm_order/>
+                </onGather>
+                <onGather value="6">
+                    <save key="selected_flavor" value="Super Taco"/>
+                    <confirm_order/>
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="confirm_order">
-            <say text="You have selected a {{selected_size}} {{selected_flavor}} pizza. To confirm, press 1. To change your order, press 2." group="confirm_prompt"/>
-            <onDTMF digits="1">
-                <flush event="onDTMF"/>
-                <stop-play target-group="confirm_prompt"/>
-                <confirm_credit_card_use/>
-            </onDTMF>
-            <onDTMF digits="2">
-                <flush event="onDTMF"/>
-                <stop-play target-group="confirm_prompt"/>
-                <select_pizza_size/>
-            </onDTMF>
+            <gather numDigits="1" input="DTMF" say="You have selected a {{selected_size}} {{selected_flavor}} pizza. To confirm, press 1. To change your order, press 2." lang="en-US" voice="Ruth" engine="generative">
+                <onGather value="1">
+                    <confirm_credit_card_use/>
+                </onGather>
+                <onGather value="2">
+                    <select_pizza_size/>
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="confirm_credit_card_use">
@@ -191,47 +156,41 @@
                     <collect_card_number/>
                 </onTrue>
                 <onFalse>
-                    <say text="Would you like to use the credit card ending in {{cc_4digits}} for this order? Press 1 for yes, 2 for no." group="credit_card_prompt"/>
-                    <onDTMF digits="1">
-                        <flush event="onDTMF"/>
-                        <stop-play target-group="credit_card_prompt"/>
-                        <save key="credit_card_number" value="{{customer_credit_card_number}}"/>
-                        <collect_expiration_date/>
-                    </onDTMF>
-                    <onDTMF digits="2">
-                        <flush event="onDTMF"/>
-                        <stop-play target-group="credit_card_prompt"/>
-                        <collect_card_number/>
-                    </onDTMF>
+                    <gather numDigits="1" input="DTMF" say="Would you like to use the credit card ending in {{cc_4digits}} for this order? Press 1 for yes, 2 for no." lang="en-US" voice="Ruth" engine="generative">
+                        <onGather value="1">
+                            <save key="credit_card_number" value="{{customer_credit_card_number}}"/>
+                            <collect_expiration_date/>
+                        </onGather>
+                        <onGather value="2">
+                            <collect_card_number/>
+                        </onGather>
+                    </gather>
                 </onFalse>
             </match>
         </snippet>
 
         <snippet id="collect_card_number">
-            <say text="Please enter your 16-digit credit card number." group="card_number_prompt"/>
-            <onDTMF digits="????????????????" ref="credit_card_number">
-                <flush event="onDTMF"/>
-                <stop-play target-group="card_number_prompt"/>
-                <collect_expiration_date/>
-            </onDTMF>
+            <gather numDigits="16" input="DTMF" say="Please enter your 16-digit credit card number." lang="en-US" voice="Ruth" engine="generative">
+                <onGather _value="credit_card_number">
+                    <collect_expiration_date/>
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="collect_expiration_date">
-            <say text="Please enter your card's 4-digit expiration date with first two digits representing month and the last two digits represnting year." group="expiration_prompt"/>
-            <onDTMF digits="????" ref="expiration_date">
-                <flush event="onDTMF"/>
-                <stop-play target-group="expiration_prompt"/>
-                <collect_security_code/>
-            </onDTMF>
+            <gather numDigits="4" input="DTMF" say="Please enter your card's 4-digit expiration date with first two digits representing month and the last two digits representing year." lang="en-US" voice="Ruth" engine="generative">
+                <onGather _value="expiration_date">
+                    <collect_security_code/>
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="collect_security_code">
-            <say text="Please enter your card's 3-digit security code." group="security_code_prompt"/>
-            <onDTMF digits="???" ref="security_code">
-                <flush event="onDTMF"/>
-                <stop-play target-group="security_code_prompt"/>
-                <process_payment/>
-            </onDTMF>
+            <gather numDigits="3" input="DTMF" say="Please enter your card's 3-digit security code." lang="en-US" voice="Ruth" engine="generative">
+                <onGather _value="security_code">
+                    <process_payment/>
+                </onGather>
+            </gather>
         </snippet>
 
         <snippet id="process_payment">
@@ -288,16 +247,14 @@
                     }
                 ]]>
                 <onComplete>
-                    <say text="Thank you for your order, your pizza will be ready shortly" group="security_code_prompt">
-                        <onConnect>
+                    <say text="Thank you for your order, your pizza will be ready shortly" lang="en-US" voice="Ruth" engine="generative">
+                        <onComplete>
                             <hangup/>
                         </onComplete>
-                    <say/>
+                    </say>
                 </onComplete>
-                
             </post>
         </snippet>
-
 
         <accept/>
         <ring/>
