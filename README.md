@@ -28,7 +28,7 @@ This repository is intended to provide developers, who are looking to develop th
 - [Authenticated conference](#conferenceroom)
 - [Live transcription](#livetranscription)
 - [Key word spotter](#keyword)
-- [Bi-lingual conversational IVR](#conversationalivr)
+- [Bi-lingual IVR](#bilingualivr)
 - [AMD with beep detection](#amdbeepdetection)
 - [Appointment reminder](#appointment_reminder)
 - [Busy](#busy)
@@ -279,9 +279,9 @@ This code will return webhook when specified word is uttered.
 
 >Note: For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/gather)
 
-#### Bi-lingual Conversational IVR <a href='#conversationalivr' id='conversationalivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/gather_bilingual_ivr.xml)
+#### Bi-lingual  IVR <a href='#bilingualivr' id='bilingualivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/gather_bilingual_ivr.xml)
 
-This is an example of 3 layer bi-lingual (English/Spanish) conversational IVR. This is a more advanced application of the key word spotter.
+This is an example of a multi level bi-lingual IVR
 
 
 1. Call is answered
