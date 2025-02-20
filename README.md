@@ -279,20 +279,20 @@ This code will return webhook when specified word is uttered.
 
 >Note: For more detail refer to our [API documentation](https://inteliscript.docs.apiary.io/#reference/media-actions/gather)
 
-#### Bi-lingual Conversational IVR <a href='#conversationalivr' id='conversationalivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/conversationalivr.xml)
+#### Bi-lingual Conversational IVR <a href='#conversationalivr' id='conversationalivr' class='anchor' aria-hidden='true'></a> [see xml](/sample/gather_bilingual_ivr.xml)
 
 This is an example of 3 layer bi-lingual (English/Spanish) conversational IVR. This is a more advanced application of the key word spotter.
 
-1. GCP authentication and account information is declared
-2. Call is answered
-3. Main Menu prompts are played in English and Spanish.
-4. If customer presses #2 the Spanish language branch is selected, if customer does nothing the English branch is used.
-5. Key words are declared for the key word spotter together with the language of the branch.
-6. Correct language and voice for Text-to-Speech is declared.
-7. Depending on the key word utterances calls may be routed to an agent.
-8. Fake ringing tone is used to simulate a call to an agent. In real scenario this would be replaced with a `<dial>`verb
 
->Note: This is an example of a serverless IVR, if decision making logic is required `<query>`can be declared in every `<onSpeak>` event to return the desired behavior.
+1. Call is answered
+2. User is given option to select language (English/Spanish). Their selection is saved and includes default voice/language and engine and will be used throughout the call flow allowing for just one flow even when two languages are considered
+3. User is given option to select Pizza. If input times out a no input option is triggered and call is hung up if users makes invalid selection they are given option to do make their choice again.
+4. User hears summary of the order and can either confirm or start over
+5. User is asked to enter Credit card number followed by a pound. Note: This is only for illustrative purposes, in real life expiration date and CVC code would have to be entered as well. 
+6. Once entered both the selected pizza and the credit card number are sent to an external web service and order is completed.
+
+
+>Note: This is an example of a serverless IVR, if decision making logic is required `<query>`can be declared in every `<onGather>` event to return the desired behavior.
 
 #### AMD with beep detection <a href='#amdbeepdetection' id='amdbeepdetection' class='anchor' aria-hidden='true'></a> [see xml](/sample/amd_beep_detection.xml)
 
