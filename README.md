@@ -81,7 +81,7 @@ This repository is intended to provide developers, who are looking to develop th
 2. Ringing tone is played to calling leg
 3. New call leg is initiated to a dialable number
 4. `INBOUND_CALLER_NUMBER` variable is used as Caller Id and the `INBOUND_CALLEE_NUMBER` is used the number forwarding the call.
-5. The new call leg contains new Diversion header that let's receiving partiers know that this is a forwarded call. 
+5. The new call leg contains new Diversion header that let's receiving partiers know that this is a forwarded call. The reason in the Diversion header should follow this RFC standard https://www.rfc-editor.org/rfc/rfc5806#:~:text=URI.%0A%0A4.-,Extension%20Syntax,-The%20syntax%20of
 6. When called party answers the two call legs are joined
 7. When either party hangs up both call legs are hung up
 
