@@ -80,9 +80,10 @@ This repository is intended to provide developers, who are looking to develop th
 1. Call is Accepted
 2. Ringing tone is played to calling leg
 3. New call leg is initiated to a dialable number
-4. `INBOUND_CALLER_NUMBER` variable is used as Caller Id
-5. When called party answers the two call legs are joined
-6. When either party hangs up both call legs are hung up
+4. `INBOUND_CALLER_NUMBER` variable is used as Caller Id and the `INBOUND_CALLEE_NUMBER` is used the number forwarding the call.
+5. The new call leg contains new Diversion header that let's receiving partiers know that this is a forwarded call. 
+6. When called party answers the two call legs are joined
+7. When either party hangs up both call legs are hung up
 
 
 #### Forward call to four numbers and loadshare among them <a href='#loadshare' id='loadshare' class='anchor' aria-hidden='true'></a> [see xml](/sample/loadshare.xml)
