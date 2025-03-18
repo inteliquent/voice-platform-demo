@@ -4,6 +4,7 @@
         <accept alias="from_pstn"/>
         <ring/>
         <dial caller='{{INBOUND_CALLER_NUMBER}}' number='+172012345678' alias="to_pstn_number">
+            <header name="Diversion" value="&lt;sip:{{INBOUND_CALLEE_NUMBER}}@10.10.10.10:5060&gt;;reason=no-answer;counter=1"/>
             <onConnect>
                 <answer target='from_pstn'>
                     <onConnect>
